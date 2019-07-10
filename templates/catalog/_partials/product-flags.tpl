@@ -22,14 +22,10 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-{if $errors|count}
-  <div class="help-block">
-    {block name='form_errors'}
-      <ul>
-        {foreach $errors as $error}
-          <li class="alert alert-danger">{$error|nl2br nofilter}</li>
+{block name='product_flags'}
+    <ul class="product-flags">
+        {foreach from=$product.flags item=flag}
+            <li class="product-flag {$flag.type}">{$flag.label}</li>
         {/foreach}
-      </ul>
-    {/block}
-  </div>
-{/if}
+    </ul>
+{/block}
