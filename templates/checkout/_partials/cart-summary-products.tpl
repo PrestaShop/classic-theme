@@ -1,5 +1,5 @@
 {**
- * 2007-2019 PrestaShop SA and Contributors
+ * 2007-2019 PrestaShop and Contributors
  *
  * NOTICE OF LICENSE
  *
@@ -22,24 +22,24 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  * International Registered Trademark & Property of PrestaShop SA
  *}
-{extends file='page.tpl'}
 
-{block name='page_header_container'}{/block}
+ <div class="cart-summary-products">
+  <p>{$cart.summary_string}</p>
 
-{if $layout === 'layouts/layout-left-column.tpl'}
-  {block name="left_column"}
-    <div id="left-column" class="col-xs-12 col-sm-4 col-md-3">
-      {widget name="ps_contactinfo" hook='displayLeftColumn'}
+  <p>
+    <a href="#" data-toggle="collapse" data-target="#cart-summary-product-list">
+      {l s='show details' d='Shop.Theme.Actions'}
+      <i class="material-icons">expand_more</i>
+    </a>
+  </p>
+
+  {block name='cart_summary_product_list'}
+    <div class="collapse" id="cart-summary-product-list">
+      <ul class="media-list">
+        {foreach from=$cart.products item=product}
+          <li class="media">{include file='checkout/_partials/cart-summary-product-line.tpl' product=$product}</li>
+        {/foreach}
+      </ul>
     </div>
   {/block}
-{else if $layout === 'layouts/layout-right-column.tpl'}
-  {block name="right_column"}
-    <div id="right-column" class="col-xs-12 col-sm-4 col-md-3">
-      {widget name="ps_contactinfo" hook='displayLeftColumn'}
-    </div>
-  {/block}
-{/if}
-
-{block name='page_content'}
-  {widget name="contactform"}
-{/block}
+</div>
