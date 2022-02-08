@@ -14,5 +14,8 @@
         }
     ],
     "minimum-stability": "dev",
-    "require": {}
+    "require-dev": {
+        "symfony/yaml": "~4.4 || ^5.0",
+        "symfony/console": "~4.4 || ^5.0"
+    }
 }

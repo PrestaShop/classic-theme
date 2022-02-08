@@ -1,0 +1,18 @@
+extends: default
+
+ignore: |
+  /_dev/node_modules/
+
+rules:
+  braces:
+    min-spaces-inside: 1
+    max-spaces-inside: 1
+  brackets:
+    min-spaces-inside: 1
+    max-spaces-inside: 1
+  document-start: disable
+  indentation:
+    ## Check .editorconfig
+    spaces: 2
+  line-length: disable
+  truthy: disable
