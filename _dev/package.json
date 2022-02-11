@@ -36,7 +36,7 @@
     "manrope": "^2.0.0",
     "material-design-icons-iconfont": "^5.0.1",
     "mini-css-extract-plugin": "^1.6.0",
-    "node-sass": "^6.0.1",
+    "node-sass": "^7.0.0",
     "postcss-flexibility": "^1.0.2",
     "postcss-loader": "^6.1.1",
     "sass-loader": "^12.1.0",
