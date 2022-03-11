@@ -60,6 +60,12 @@ global_settings:
       #  - blockreassurance
       # displayNavFullWidth:
       #  - blockreassurance
+      displayAdminCustomers:
+        - blockwishlist
+      displayCustomerAccount:
+        - blockwishlist
+      displayMyAccountBlock:
+        - blockwishlist
       displayNav1:
         - ps_contactinfo
       displayNav2:
@@ -85,8 +91,11 @@ global_settings:
         - ps_linklist
         - ps_customeraccountlinks
         - ps_contactinfo
+        - blockwishlist
       # displayFooterAfter:
       #  - blockreassurance
+      displayFooterProduct:
+        - productcomments
       displayLeftColumn:
         - ps_categorytree
         - ps_facetedsearch
@@ -94,10 +103,15 @@ global_settings:
         - ps_searchbar
       displayProductAdditionalInfo:
         - ps_sharebuttons
+        - productcomments
+      displayProductListReviews:
+        - productcomments
       # displayReassurance:
       #  - blockreassurance
       displayOrderConfirmation2:
         - ps_featuredproducts
+      displayProductActions:
+        - blockwishlist
 
   image_types:
     cart_default:
