@@ -122,6 +122,15 @@
                   {block name='product_add_to_cart'}
                     {include file='catalog/_partials/product-add-to-cart.tpl'}
                   {/block}
+                  
+                  {block name='product_availability_date'}
+                    {if $product.availability_date && $product.availability != 'available' }
+                      <div class="product-availability-date">
+                        <label>{l s='Availability date:' d='Shop.Theme.Catalog'} </label>
+                        <span>{$product.availability_date}</span>
+                      </div>
+                    {/if}
+                  {/block}
 
                   {block name='product_additional_info'}
                     {include file='catalog/_partials/product-additional-info.tpl'}
