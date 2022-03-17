@@ -440,6 +440,13 @@ body#checkout {
     .forgot-password {
       margin-left: 14.38rem;
     }
+
+    @media (max-width: 425px) {
+      .forgot-password{
+        margin-left: 0;
+        margin-bottom: 10px; 
+      } 
+    }
   }
 
   .additional-information {
