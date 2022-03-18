@@ -441,7 +441,7 @@ body#checkout {
       margin-left: 14.38rem;
     }
 
-    @media (max-width: 425px) {
+    @include media-breakpoint-down(sm) {
       .forgot-password{
         margin-bottom: 0.625rem;
         margin-left: 0;
