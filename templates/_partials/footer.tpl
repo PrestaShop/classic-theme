@@ -41,6 +41,7 @@
         {hook h='displayFooterAfter'}
       {/block}
     </div>
+    {if $configuration.display_footer_copyright}
     <div class="row">
       <div class="col-md-12">
         <p class="text-sm-center">
@@ -52,5 +53,6 @@
         </p>
       </div>
     </div>
+    {/if}
   </div>
 </div>
