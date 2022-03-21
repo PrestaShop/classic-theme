@@ -119,7 +119,7 @@ $(document).ready(() => {
   function createInputFile() {
     $(prestashop.themeSelectors.fileInput).on('change', (event) => {
       const target = $(event.currentTarget)[0];
-      const file = target.files[0] ?? null;
+      const file = (target) ? target.files[0] : null;
 
       if (target && file) {
         $(target).prev().text(file.name);
