@@ -118,11 +118,10 @@ $(document).ready(() => {
 
   function createInputFile() {
     $(prestashop.themeSelectors.fileInput).on('change', (event) => {
-      let target;
-      let file;
+      const target = $(event.currentTarget)[0];
+      const file = target.files[0] ?? null;
 
-      // eslint-disable-next-line
-      if ((target = $(event.currentTarget)[0]) && (file = target.files[0])) {
+      if (target && file) {
         $(target).prev().text(file.name);
       }
     });
