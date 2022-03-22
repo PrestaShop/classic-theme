@@ -213,15 +213,7 @@ $(document).ready(() => {
         CheckUpdateQuantityOperations.checkUpdateOperation(resp);
 
         $target.val(resp.quantity);
-
-        let dataset;
-
-        if ($target && $target.dataset) {
-          // eslint-disable-next-line prefer-destructuring
-          dataset = $target.dataset;
-        } else {
-          dataset = resp;
-        }
+        const dataset = ($target && $target.dataset) ? $target.dataset : resp;
 
         // Refresh cart preview
         prestashop.emit('updateCart', {
@@ -340,8 +332,13 @@ const CheckUpdateQuantityOperations = {
     }
 
     if (errorMsg !== '') {
-      // eslint-disable-next-line
-      const strError = ` <article class="alert alert-danger" role="alert" data-alert="danger"><ul><li>${errorMsg}</li></ul></article>`;
+      const strError = `
+        <article class="alert alert-danger" role="alert" data-alert="danger">
+          <ul>
+            <li>${errorMsg}</li>
+          </ul>
+        </article>
+      `;
       $(prestashop.themeSelectors.notifications.container).html(strError);
       errorMsg = '';
       isUpdateOperation = false;
@@ -361,9 +358,9 @@ const CheckUpdateQuantityOperations = {
      * resp.hasError can be not defined but resp.errors not empty: quantity is updated but order cannot be placed
      * when resp.hasError=true, quantity is not updated
      */
-    // eslint-disable-next-line
-    hasError = resp.hasOwnProperty('hasError');
-    const errors = resp.errors || '';
+    const {hasError: hasErrorOccurred, errors: errorData} = resp;
+    hasError = hasErrorOccurred ?? false;
+    const errors = errorData ?? '';
 
     // 1.7.2.x returns errors as string, 1.7.3.x returns array
     if (errors instanceof Array) {
