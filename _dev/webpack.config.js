@@ -27,6 +27,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
+const LicensePlugin = require('webpack-license-plugin');
 
 let config = {
   entry: {
@@ -82,6 +83,13 @@ let config = {
     new CssoWebpackPlugin({
       forceMediaMerge: true,
     }),
+    new LicensePlugin({ 
+      outputFilename: 'thirdPartyNotice.json',
+      licenseOverrides: {
+        'bootstrap-touchspin@3.1.1': 'Apache-2.0',
+      },
+      replenishDefaultLicenseTexts: true,
+    })
   ]
 };
 

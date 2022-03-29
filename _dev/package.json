@@ -49,6 +49,7 @@
     "velocity-animate": "^1.2.3",
     "webpack": "^5.36.2",
     "webpack-cli": "^3.3.10",
+    "webpack-license-plugin": "^4.2.2",
     "webpack-sources": "^0.1.0"
   }
 }
