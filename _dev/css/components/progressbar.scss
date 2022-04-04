@@ -1,0 +1,8 @@
+.progress {
+  background: $gray-light-second;
+
+  &-bar {
+    height: 100%;
+    transition: 0.25s ease-out;
+  }
+}

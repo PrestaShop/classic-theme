@@ -36,7 +36,7 @@
         {$field.label}
       {/if}
     </label>
-    <div class="col-md-6{if ($field.type === 'radio-buttons')} form-control-valign{/if}">
+    <div class="col-md-6 js-input-column{if ($field.type === 'radio-buttons')} form-control-valign{/if}">
 
       {if $field.type === 'select'}
 
@@ -139,9 +139,11 @@
               id="field-{$field.name}"
               class="form-control js-child-focus js-visible-password"
               name="{$field.name}"
-              title="{l s='At least 5 characters long' d='Shop.Forms.Help'}"
-              aria-label="{l s='Password input of at least 5 characters' d='Shop.Forms.Help'}"
+              aria-label="{l s='Password input' d='Shop.Forms.Help'}"
               type="password"
+              {if isset($configuration.password_policy.minimum_length)}data-minlength="{$configuration.password_policy.minimum_length}"{/if}
+              {if isset($configuration.password_policy.maximum_length)}data-maxlength="{$configuration.password_policy.maximum_length}"{/if}
+              {if isset($configuration.password_policy.minimum_score)}data-minscore="{$configuration.password_policy.minimum_score}"{/if}
               {if $field.autocomplete}autocomplete="{$field.autocomplete}"{/if}
               value=""
               pattern=".{literal}{{/literal}5,{literal}}{/literal}"

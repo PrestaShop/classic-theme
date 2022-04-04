@@ -41,6 +41,7 @@ import prestashop from 'prestashop';
 import EventEmitter from 'events';
 import DropDown from './components/drop-down';
 import Form from './components/form';
+import usePasswordPolicy from './components/usePasswordPolicy';
 import ProductMinitature from './components/product-miniature';
 import ProductSelect from './components/product-select';
 import TopMenu from './components/top-menu';
@@ -71,6 +72,7 @@ $(document).ready(() => {
   topMenu.init();
   productMinitature.init();
   productSelect.init();
+  usePasswordPolicy('.field-password-policy');
 
   $('.carousel[data-touch="true"]').swipe({
     swipe(event, direction) {

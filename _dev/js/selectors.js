@@ -25,6 +25,19 @@
 import prestashop from 'prestashop';
 import $ from 'jquery';
 
+const passwordPolicy = {
+  template: '#password-feedback',
+  hint: '.js-hint-password',
+  container: '.password-strength-feedback',
+  strengthText: '.password-strength-text',
+  requirementScore: '.password-requirements-score',
+  requirementLength: '.password-requirements-length',
+  requirementScoreIcon: '.password-requirements-score i',
+  requirementLengthIcon: '.password-requirements-length i',
+  progressBar: '.progress-bar',
+  inputColumn: '.js-input-column',
+};
+
 prestashop.themeSelectors = {
   product: {
     tabs: '.tabs .nav-link',
@@ -88,6 +101,7 @@ prestashop.themeSelectors = {
     dangerAlert: '#notifications article.alert-danger',
     container: '#notifications .notifications-container',
   },
+  passwordPolicy,
 };
 
 $(document).ready(() => {
