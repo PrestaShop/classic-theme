@@ -25,7 +25,7 @@
 {if $field.type == 'hidden'}
 
   {block name='form_field_item_hidden'}
-    <input type="hidden" name="{$field.name}" value="{$field.value}">
+    <input type="hidden" name="{$field.name}" value="{$field.value|default}">
   {/block}
 
 {else}
@@ -101,7 +101,7 @@
       {elseif $field.type === 'date'}
 
         {block name='form_field_item_date'}
-          <input id="field-{$field.name}" name="{$field.name}" class="form-control" type="date" value="{$field.value}"{if isset($field.availableValues.placeholder)} placeholder="{$field.availableValues.placeholder}"{/if}>
+          <input id="field-{$field.name}" name="{$field.name}" class="form-control" type="date" value="{$field.value|default}"{if isset($field.availableValues.placeholder)} placeholder="{$field.availableValues.placeholder}"{/if}>
           {if isset($field.availableValues.comment)}
             <span class="form-control-comment">
               {$field.availableValues.comment}
@@ -115,7 +115,7 @@
           <div class="js-parent-focus">
             {html_select_date
             field_order=DMY
-            time={$field.value}
+            time={$field.value|default}
             field_array={$field.name}
             prefix=false
             reverse_years=true
@@ -169,7 +169,7 @@
             class="form-control"
             name="{$field.name}"
             type="{$field.type}"
-            value="{$field.value}"
+            value="{$field.value|default}"
             {if $field.autocomplete}autocomplete="{$field.autocomplete}"{/if}
             {if isset($field.availableValues.placeholder)}placeholder="{$field.availableValues.placeholder}"{/if}
             {if $field.maxLength}maxlength="{$field.maxLength}"{/if}
