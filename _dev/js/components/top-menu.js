@@ -37,7 +37,6 @@ export default class TopMenu extends DropDown {
       const currentTargetClass = $(e.currentTarget).attr('class');
 
       if (elmtClass !== currentTargetClass) {
-        // eslint-disable-next-line
         const classesSelected = Array.prototype.slice
           .call(e.currentTarget.classList)
           .map((elem) => (typeof elem === 'string' ? `.${elem}` : false));
