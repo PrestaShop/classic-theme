@@ -13,7 +13,7 @@
             {/block}
 
             <p>
-              {l s='An email has been sent to your mail address %email%.' d='Shop.Theme.Checkout' sprintf=['%email%' => $order_customer.email]}
+              {l s='An email has been sent to your mail address %email%.' d='Shop.Theme.Checkout' sprintf=['%email%' => $customer.email]}
               {if $order.details.invoice_url}
                 {* [1][/1] is for a HTML tag. *}
                 {l
