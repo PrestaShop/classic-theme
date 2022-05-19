@@ -45,7 +45,7 @@
       <tbody>
         {foreach from=$cart_rules item=cart_rule}
           <tr>
-            <th scope="row">{$cart_rule.code}</th>
+            <td scope="row">{$cart_rule.code}</td>
             <td>{$cart_rule.name}</td>
             <td class="text-xs-right">{$cart_rule.quantity_for_user}</td>
             <td>{$cart_rule.value}</td>
