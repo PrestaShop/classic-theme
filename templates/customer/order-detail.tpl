@@ -53,7 +53,9 @@
 
       <div class="box">
           <ul>
-            <li><strong>{l s='Carrier' d='Shop.Theme.Checkout'}</strong> {$order.carrier.name}</li>
+            {if $order.carrier.name}
+              <li><strong>{l s='Carrier' d='Shop.Theme.Checkout'}</strong> {$order.carrier.name}</li>
+            {/if}
             <li><strong>{l s='Payment method' d='Shop.Theme.Checkout'}</strong> {$order.details.payment}</li>
 
             {if $order.details.invoice_url}
