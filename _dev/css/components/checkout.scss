@@ -440,6 +440,13 @@ body#checkout {
     .forgot-password {
       margin-left: 14.38rem;
     }
+
+    @include media-breakpoint-down(sm) {
+      .forgot-password {
+        margin-bottom: 0.625rem;
+        margin-left: 0;
+      }
+    }
   }
 
   .additional-information {
