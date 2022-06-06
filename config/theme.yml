@@ -2,9 +2,9 @@ name: classic
 display_name: Classic
 version: 2.0.0
 author:
-  name: "PrestaShop Team"
-  email: "pub@prestashop.com"
-  url: "https://www.prestashop.com"
+  name: "PrestaShop SA and Contributors"
+  email: "contact@prestashop.com"
+  url: "https://www.prestashop-project.org"
 
 meta:
   compatibility:
