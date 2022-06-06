@@ -117,6 +117,10 @@
       line-height: inherit;
     }
   }
+
+  .product-add-to-cart {
+    word-wrap: break-word;
+  }
 }
 
 .product-quantity {
@@ -203,6 +207,7 @@
   .tax-shipping-delivery-label {
     font-size: 0.8125rem;
     color: $gray;
+    word-wrap: break-word;
 
     .delivery-information {
       padding: 0 0 0 2px;
@@ -600,7 +605,7 @@
 }
 
 #product-availability {
-  display: inline-block;
+  display: inline;
   margin-top: 0.625rem;
   font-weight: 700;
 
@@ -697,6 +702,7 @@
     font-weight: 700;
     color: $white;
     text-transform: uppercase;
+    word-break: break-word;
     pointer-events: auto;
     background: $brand-primary;
 
