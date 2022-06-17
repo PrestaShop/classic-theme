@@ -108,7 +108,8 @@
 }
 
 /*** Login page ***/
-.page-authentication {
+.page-authentication,
+.page-registration {
   #content {
     @include customer-area-base-box();
     max-width: 640px;
