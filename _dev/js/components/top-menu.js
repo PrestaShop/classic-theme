@@ -30,7 +30,7 @@ export default class TopMenu extends DropDown {
   init() {
     let elmtClass;
     const self = this;
-    this.el.find('li').hover((e) => {
+    this.el.find('li').on('mouseenter mouseleave', (e) => {
       if (this.el.parent().hasClass('mobile')) {
         return;
       }
