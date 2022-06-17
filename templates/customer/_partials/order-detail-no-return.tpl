@@ -93,13 +93,7 @@
             {/if}
           </td>
           <td>
-            {if $product.customizations}
-              {foreach $product.customizations as $customization}
-                {$customization.quantity}
-              {/foreach}
-            {else}
-              {$product.quantity}
-            {/if}
+            {$product.quantity}
           </td>
           <td class="text-xs-right">{$product.price}</td>
           <td class="text-xs-right">{$product.total}</td>
@@ -150,13 +144,7 @@
                 {$product.price}
               </div>
               <div class="col-xs-4">
-                {if $product.customizations}
-                  {foreach $product.customizations as $customization}
-                    {$customization.quantity}
-                  {/foreach}
-                {else}
-                  {$product.quantity}
-                {/if}
+                {$product.quantity}
               </div>
               <div class="col-xs-4 text-xs-right">
                 {$product.total}
