@@ -32,31 +32,30 @@ import ProductMinitature from './components/product-miniature';
 $(document).ready(() => {
   const history = window.location.href;
 
-  prestashop.on('clickQuickView', (elm) => {
-    const data = {
-      action: 'quickview',
-      id_product: elm.dataset.idProduct,
-      id_product_attribute: elm.dataset.idProductAttribute,
-    };
-    $.post(prestashop.urls.pages.product, data, null, 'json')
-      .then((resp) => {
-        $('body').append(resp.quickview_html);
-        const productModal = $(
-          `#quickview-modal-${resp.product.id}-${resp.product.id_product_attribute}`,
-        );
-        productModal.modal('show');
-        productConfig(productModal);
-        productModal.on('hidden.bs.modal', () => {
-          productModal.remove();
-        });
-      })
-      .fail((resp) => {
-        prestashop.emit('handleError', {
-          eventType: 'clickQuickView',
-          resp,
-        });
-      });
-  });
+  const move = (direction) => {
+    const THUMB_MARGIN = 20;
+    const $thumbnails = $('.js-qv-product-images');
+    const thumbHeight = $('.js-qv-product-images li img').height() + THUMB_MARGIN;
+    const currentPosition = $thumbnails.position().top;
+    $thumbnails.velocity(
+      {
+        translateY:
+          direction === 'up'
+            ? currentPosition + thumbHeight
+            : currentPosition - thumbHeight,
+      },
+      () => {
+        if ($thumbnails.position().top >= 0) {
+          $('.arrow-up').css('opacity', '.2');
+        } else if (
+          $thumbnails.position().top + $thumbnails.height()
+          <= $('.js-qv-mask').height()
+        ) {
+          $('.arrow-down').css('opacity', '.2');
+        }
+      },
+    );
+  };
 
   const productConfig = (qv) => {
     const MAX_THUMBS = 4;
@@ -105,30 +104,32 @@ $(document).ready(() => {
     $(prestashop.themeSelectors.touchspin).off('touchstart.touchspin');
   };
 
-  const move = (direction) => {
-    const THUMB_MARGIN = 20;
-    const $thumbnails = $('.js-qv-product-images');
-    const thumbHeight = $('.js-qv-product-images li img').height() + THUMB_MARGIN;
-    const currentPosition = $thumbnails.position().top;
-    $thumbnails.velocity(
-      {
-        translateY:
-          direction === 'up'
-            ? currentPosition + thumbHeight
-            : currentPosition - thumbHeight,
-      },
-      () => {
-        if ($thumbnails.position().top >= 0) {
-          $('.arrow-up').css('opacity', '.2');
-        } else if (
-          $thumbnails.position().top + $thumbnails.height()
-          <= $('.js-qv-mask').height()
-        ) {
-          $('.arrow-down').css('opacity', '.2');
-        }
-      },
-    );
-  };
+  prestashop.on('clickQuickView', (elm) => {
+    const data = {
+      action: 'quickview',
+      id_product: elm.dataset.idProduct,
+      id_product_attribute: elm.dataset.idProductAttribute,
+    };
+    $.post(prestashop.urls.pages.product, data, null, 'json')
+      .then((resp) => {
+        $('body').append(resp.quickview_html);
+        const productModal = $(
+          `#quickview-modal-${resp.product.id}-${resp.product.id_product_attribute}`,
+        );
+        productModal.modal('show');
+        productConfig(productModal);
+        productModal.on('hidden.bs.modal', () => {
+          productModal.remove();
+        });
+      })
+      .fail((resp) => {
+        prestashop.emit('handleError', {
+          eventType: 'clickQuickView',
+          resp,
+        });
+      });
+  });
+
   $('body').on(
     'click',
     prestashop.themeSelectors.listing.searchFilterToggler,
@@ -171,6 +172,39 @@ $(document).ready(() => {
 
     return $(event.target).parent()[0].dataset.searchUrl;
   };
+
+  function updateProductListDOM(data) {
+    $(prestashop.themeSelectors.listing.searchFilters).replaceWith(
+      data.rendered_facets,
+    );
+    $(prestashop.themeSelectors.listing.activeSearchFilters).replaceWith(
+      data.rendered_active_filters,
+    );
+    $(prestashop.themeSelectors.listing.listTop).replaceWith(
+      data.rendered_products_top,
+    );
+
+    const renderedProducts = $(data.rendered_products);
+    const productSelectors = $(prestashop.themeSelectors.listing.product, renderedProducts);
+
+    if (productSelectors.length > 0) {
+      productSelectors.removeClass().addClass($(prestashop.themeSelectors.listing.product).first().attr('class'));
+    }
+
+    $(prestashop.themeSelectors.listing.list).replaceWith(renderedProducts);
+
+    $(prestashop.themeSelectors.listing.listBottom).replaceWith(
+      data.rendered_products_bottom,
+    );
+    if (data.rendered_products_header) {
+      $(prestashop.themeSelectors.listing.listHeader).replaceWith(
+        data.rendered_products_header,
+      );
+    }
+
+    const productMinitature = new ProductMinitature();
+    productMinitature.init();
+  }
 
   $('body').on(
     'change',
@@ -219,36 +253,3 @@ $(document).ready(() => {
     window.scrollTo(0, 0);
   });
 });
-
-function updateProductListDOM(data) {
-  $(prestashop.themeSelectors.listing.searchFilters).replaceWith(
-    data.rendered_facets,
-  );
-  $(prestashop.themeSelectors.listing.activeSearchFilters).replaceWith(
-    data.rendered_active_filters,
-  );
-  $(prestashop.themeSelectors.listing.listTop).replaceWith(
-    data.rendered_products_top,
-  );
-
-  const renderedProducts = $(data.rendered_products);
-  const productSelectors = $(prestashop.themeSelectors.listing.product, renderedProducts);
-
-  if (productSelectors.length > 0) {
-    productSelectors.removeClass().addClass($(prestashop.themeSelectors.listing.product).first().attr('class'));
-  }
-
-  $(prestashop.themeSelectors.listing.list).replaceWith(renderedProducts);
-
-  $(prestashop.themeSelectors.listing.listBottom).replaceWith(
-    data.rendered_products_bottom,
-  );
-  if (data.rendered_products_header) {
-    $(prestashop.themeSelectors.listing.listHeader).replaceWith(
-      data.rendered_products_header,
-    );
-  }
-
-  const productMinitature = new ProductMinitature();
-  productMinitature.init();
-}

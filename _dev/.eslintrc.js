@@ -15,11 +15,11 @@ module.exports = {
     window: true,
     prestashop: true,
   },
+  extends: ['airbnb-base'],
+  parser: '@babel/eslint-parser',
   parserOptions: {
-    parser: '@babel/eslint-parser',
     requireConfigFile: false,
   },
-  extends: ['airbnb'],
   plugins: ['import'],
   rules: {
     indent: ['error', 2, {SwitchCase: 1}],
