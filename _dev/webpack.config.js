@@ -25,7 +25,7 @@
 const webpack = require('webpack');
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 const LicensePlugin = require('webpack-license-plugin');
 
@@ -58,14 +58,10 @@ let config = {
       },
       {
         test: /.(png|woff(2)?|eot|otf|ttf|svg|gif)(\?[a-z0-9=\.]+)?$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '../css/[hash].[ext]',
-            },
-          },
-        ],
+        type: 'asset/resource',
+        generator: {
+          filename: '../css/[hash][ext]',
+        },
       },
       {
         test: /\.css$/,
@@ -95,25 +91,14 @@ let config = {
 
 if (process.env.NODE_ENV === 'production') {
   config.optimization = {
+    minimize: true,
     minimizer: [
-      new UglifyJsPlugin({
-        sourceMap: false,
-        uglifyOptions: {
-          compress: {
-            sequences: true,
-            conditionals: true,
-            booleans: true,
-            if_return: true,
-            join_vars: true,
-            drop_console: true,
-          },
-          output: {
-            comments: false,
-          },
-        }
-      })
-    ]
-  }
+      new TerserPlugin({
+        parallel: true,
+        extractComments: false,
+      }),
+    ],
+  };
 }
 
 module.exports = config;
