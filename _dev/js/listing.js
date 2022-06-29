@@ -222,7 +222,6 @@ $(document).ready(() => {
 });
 
 function updateProductListDOM(data) {
-  console.log(data)
   $(prestashop.themeSelectors.listing.searchFilters).replaceWith(
     data.rendered_facets,
   );
