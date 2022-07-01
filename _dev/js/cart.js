@@ -11,6 +11,60 @@ let hasError = false;
 let isUpdateOperation = false;
 let errorMsg = '';
 
+const CheckUpdateQuantityOperations = {
+  switchErrorStat: () => {
+    /**
+     * if errorMsg is not empty or if notifications are shown, we have error to display
+     * if hasError is true, quantity was not updated : we don't disable checkout button
+     */
+    const $checkoutBtn = $(prestashop.themeSelectors.checkout.btn);
+
+    if ($(prestashop.themeSelectors.notifications.dangerAlert).length || (errorMsg !== '' && !hasError)) {
+      $checkoutBtn.addClass('disabled');
+    }
+
+    if (errorMsg !== '') {
+      const strError = `
+        <article class="alert alert-danger" role="alert" data-alert="danger">
+          <ul>
+            <li>${errorMsg}</li>
+          </ul>
+        </article>
+      `;
+      $(prestashop.themeSelectors.notifications.container).html(strError);
+      errorMsg = '';
+      isUpdateOperation = false;
+      if (hasError) {
+        // if hasError is true, quantity was not updated : allow checkout
+        $checkoutBtn.removeClass('disabled');
+      }
+    } else if (!hasError && isUpdateOperation) {
+      hasError = false;
+      isUpdateOperation = false;
+      $(prestashop.themeSelectors.notifications.container).html('');
+      $checkoutBtn.removeClass('disabled');
+    }
+  },
+  checkUpdateOperation: (resp) => {
+    /**
+     * resp.hasError can be not defined but resp.errors not empty: quantity is updated but order cannot be placed
+     * when resp.hasError=true, quantity is not updated
+     */
+    const {hasError: hasErrorOccurred, errors: errorData} = resp;
+    hasError = hasErrorOccurred ?? false;
+    const errors = errorData ?? '';
+
+    // 1.7.2.x returns errors as string, 1.7.3.x returns array
+    if (errors instanceof Array) {
+      errorMsg = errors.join(' ');
+    } else {
+      errorMsg = errors;
+    }
+
+    isUpdateOperation = true;
+  },
+};
+
 /**
  * Attach Bootstrap TouchSpin event handlers
  */
@@ -31,6 +85,16 @@ function createSpin() {
 
   CheckUpdateQuantityOperations.switchErrorStat();
 }
+
+const preventCustomModalOpen = (event) => {
+  if (window.shouldPreventModal) {
+    event.preventDefault();
+
+    return false;
+  }
+
+  return true;
+};
 
 $(document).ready(() => {
   const productLineInCartSelector = prestashop.themeSelectors.cart.productLineQty;
@@ -132,16 +196,6 @@ $(document).ready(() => {
 
   const getTouchSpinInput = ($button) => $($button.parents(prestashop.themeSelectors.cart.touchspin).find('input'));
 
-  const preventCustomModalOpen = (event) => {
-    if (window.shouldPreventModal) {
-      event.preventDefault();
-
-      return false;
-    }
-
-    return true;
-  };
-
   $(prestashop.themeSelectors.product.customizationModal).on('show.bs.modal', (modalEvent) => {
     preventCustomModalOpen(modalEvent);
   });
@@ -194,8 +248,6 @@ $(document).ready(() => {
 
   $body.on('click', prestashop.themeSelectors.cart.actions, handleCartAction);
 
-  $body.on('touchspin.on.stopspin', spinnerSelector, debounce(updateProductQuantityInCart));
-
   function sendUpdateQuantityInCartRequest(updateQuantityInCartUrl, requestData, $target) {
     abortPreviousRequests();
     window.shouldPreventModal = true;
@@ -229,6 +281,10 @@ $(document).ready(() => {
       });
   }
 
+  function getQuantityChangeType($quantity) {
+    return $quantity > 0 ? 'up' : 'down';
+  }
+
   function getRequestData(quantity) {
     return {
       ajax: '1',
@@ -236,10 +292,6 @@ $(document).ready(() => {
       action: 'update',
       op: getQuantityChangeType(quantity),
     };
-  }
-
-  function getQuantityChangeType($quantity) {
-    return $quantity > 0 ? 'up' : 'down';
   }
 
   function updateProductQuantityInCart(event) {
@@ -270,6 +322,8 @@ $(document).ready(() => {
       sendUpdateQuantityInCartRequest(updateQuantityInCartUrl, getRequestData(qty), $target);
     }
   }
+
+  $body.on('touchspin.on.stopspin', spinnerSelector, debounce(updateProductQuantityInCart));
 
   $body.on('focusout keyup', productLineInCartSelector, (event) => {
     if (event.type === 'keyup') {
@@ -318,57 +372,3 @@ $(document).ready(() => {
     return false;
   });
 });
-
-const CheckUpdateQuantityOperations = {
-  switchErrorStat: () => {
-    /**
-     * if errorMsg is not empty or if notifications are shown, we have error to display
-     * if hasError is true, quantity was not updated : we don't disable checkout button
-     */
-    const $checkoutBtn = $(prestashop.themeSelectors.checkout.btn);
-
-    if ($(prestashop.themeSelectors.notifications.dangerAlert).length || (errorMsg !== '' && !hasError)) {
-      $checkoutBtn.addClass('disabled');
-    }
-
-    if (errorMsg !== '') {
-      const strError = `
-        <article class="alert alert-danger" role="alert" data-alert="danger">
-          <ul>
-            <li>${errorMsg}</li>
-          </ul>
-        </article>
-      `;
-      $(prestashop.themeSelectors.notifications.container).html(strError);
-      errorMsg = '';
-      isUpdateOperation = false;
-      if (hasError) {
-        // if hasError is true, quantity was not updated : allow checkout
-        $checkoutBtn.removeClass('disabled');
-      }
-    } else if (!hasError && isUpdateOperation) {
-      hasError = false;
-      isUpdateOperation = false;
-      $(prestashop.themeSelectors.notifications.container).html('');
-      $checkoutBtn.removeClass('disabled');
-    }
-  },
-  checkUpdateOperation: (resp) => {
-    /**
-     * resp.hasError can be not defined but resp.errors not empty: quantity is updated but order cannot be placed
-     * when resp.hasError=true, quantity is not updated
-     */
-    const {hasError: hasErrorOccurred, errors: errorData} = resp;
-    hasError = hasErrorOccurred ?? false;
-    const errors = errorData ?? '';
-
-    // 1.7.2.x returns errors as string, 1.7.3.x returns array
-    if (errors instanceof Array) {
-      errorMsg = errors.join(' ');
-    } else {
-      errorMsg = errors;
-    }
-
-    isUpdateOperation = true;
-  },
-};

@@ -27,33 +27,6 @@ import prestashop from 'prestashop';
 import ProductSelect from './components/product-select';
 
 $(document).ready(() => {
-  createProductSpin();
-  createInputFile();
-  coverImage();
-  imageScrollBox();
-  addJsProductTabActiveSelector();
-
-  prestashop.on('updatedProduct', (event) => {
-    createInputFile();
-    coverImage();
-    if (event && event.product_minimal_quantity) {
-      const minimalProductQuantity = parseInt(event.product_minimal_quantity, 10);
-      const quantityInputSelector = prestashop.selectors.quantityWanted;
-      const quantityInput = $(quantityInputSelector);
-
-      // @see http://www.virtuosoft.eu/code/bootstrap-touchspin/ about Bootstrap TouchSpin
-      quantityInput.trigger('touchspin.updatesettings', {
-        min: minimalProductQuantity,
-      });
-    }
-    imageScrollBox();
-    $($(prestashop.themeSelectors.product.activeTabs).attr('href')).addClass('active').removeClass('fade');
-    $(prestashop.themeSelectors.product.imagesModal).replaceWith(event.product_images_modal);
-
-    const productSelect = new ProductSelect();
-    productSelect.init();
-  });
-
   function coverImage() {
     const productCover = $(prestashop.themeSelectors.product.cover);
     let thumbSelected = $(prestashop.themeSelectors.product.selected);
@@ -173,4 +146,31 @@ $(document).ready(() => {
       $(target.attr('href')).removeClass(prestashop.themeSelectors.product.activeTabClass);
     });
   }
+
+  createProductSpin();
+  createInputFile();
+  coverImage();
+  imageScrollBox();
+  addJsProductTabActiveSelector();
+
+  prestashop.on('updatedProduct', (event) => {
+    createInputFile();
+    coverImage();
+    if (event && event.product_minimal_quantity) {
+      const minimalProductQuantity = parseInt(event.product_minimal_quantity, 10);
+      const quantityInputSelector = prestashop.selectors.quantityWanted;
+      const quantityInput = $(quantityInputSelector);
+
+      // @see http://www.virtuosoft.eu/code/bootstrap-touchspin/ about Bootstrap TouchSpin
+      quantityInput.trigger('touchspin.updatesettings', {
+        min: minimalProductQuantity,
+      });
+    }
+    imageScrollBox();
+    $($(prestashop.themeSelectors.product.activeTabs).attr('href')).addClass('active').removeClass('fade');
+    $(prestashop.themeSelectors.product.imagesModal).replaceWith(event.product_images_modal);
+
+    const productSelect = new ProductSelect();
+    productSelect.init();
+  });
 });
