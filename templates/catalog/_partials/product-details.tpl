@@ -36,10 +36,10 @@
   {/block}
 
   {block name='product_availability_date'}
-    {if $product.availability_date}
+    {if $product.availability_date && $product.availability != 'available'}
       <div class="product-availability-date">
         <label>{l s='Availability date:' d='Shop.Theme.Catalog'} </label>
-        <span>{$product.availability_date}</span>
+        <span>{dateFormat date=$product.availability_date}</span>
       </div>
     {/if}
   {/block}
