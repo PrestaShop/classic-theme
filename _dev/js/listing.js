@@ -189,8 +189,7 @@ $(document).ready(() => {
 
     if (productSelectors.length > 0) {
       productSelectors.removeClass().addClass(productSelectors.first().attr('class'));
-    }
-    else {
+    } else {
       productSelectors.removeClass().addClass(renderedProducts.first().attr('class'));
     }
 
