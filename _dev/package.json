@@ -48,5 +48,8 @@
     "webpack-cli": "^4.7.0",
     "webpack-license-plugin": "^4.2.2",
     "webpack-sources": "^0.1.0"
+  },
+  "dependencies": {
+    "sprintf-js": "^1.1.2"
   }
 }
