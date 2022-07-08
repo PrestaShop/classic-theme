@@ -150,8 +150,9 @@ $(document).ready(() => {
     $(prestashop.themeSelectors.contentWrapper).removeClass('hidden-sm-down');
     $(prestashop.themeSelectors.footer).removeClass('hidden-sm-down');
   });
-  $(`${prestashop.themeSelectors.listing.searchFilterControls} .ok`).on(
+  $('body').on(
     'click',
+    `${prestashop.themeSelectors.listing.searchFilterControls} .ok`,
     () => {
       $(prestashop.themeSelectors.listing.searchFiltersWrapper).addClass(
         'hidden-sm-down',
