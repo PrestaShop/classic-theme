@@ -30,8 +30,6 @@ import "velocity-animate";
 import ProductMinitature from './components/product-miniature';
 
 $(document).ready(() => {
-  const history = window.location.href;
-
   const move = (direction) => {
     const THUMB_MARGIN = 20;
     const $thumbnails = $('.js-qv-product-images');
@@ -232,12 +230,11 @@ $(document).ready(() => {
     );
   });
 
-  if ($(prestashop.themeSelectors.listing.list).length) {
-    window.addEventListener('popstate', (e) => {
-      const {state} = e;
-      window.location.href = state && state.current_url ? state.current_url : history;
-    });
-  }
+  window.addEventListener('popstate', (e) => {
+    if (e.state && e.state.current_url) {
+      window.location.href = e.state.current_url;
+    }
+  });
 
   $('body').on(
     'change',
