@@ -27,9 +27,9 @@
     "@context": "https://schema.org",
     "@type": "Organization",
     "name" : "{$shop.name}",
-    "url" : "{$urls.pages.index}",
+    "url" : "{$urls.pages.index}"
     {if $shop.logo_details}
-      "logo": {
+     ,"logo": {
         "@type": "ImageObject",
         "url":"{$shop.logo_details.src}"
       }
