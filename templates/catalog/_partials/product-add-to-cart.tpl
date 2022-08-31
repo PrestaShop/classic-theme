@@ -75,7 +75,14 @@
           {else}
             <i class="material-icons product-unavailable">&#xE14B;</i>
           {/if}
+          {if $product.show_quantities}
+            <span data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{$product.quantity}</span>
+          {/if}
           {$product.availability_message}
+         {else}
+          {if $product.show_quantities}
+            <span data-stock="{$product.quantity}" data-allow-oosp="{$product.allow_oosp}">{$product.quantity}</span>  <label class="label">{l s='In stock' d='Shop.Theme.Catalog'}</label>
+          {/if}
         {/if}
       </span>
     {/block}
