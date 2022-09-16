@@ -53,9 +53,15 @@
 
         <div class="highlighted-informations{if !$product.main_variants} no-variants{/if}">
           {block name='quick_view'}
-            <a class="quick-view js-quick-view" href="#" data-link-action="quickview">
-              <i class="material-icons search">&#xE8B6;</i> {l s='Quick view' d='Shop.Theme.Actions'}
-            </a>
+            {if $product.customization_required}
+              <a class="see-product" href="{$product.url}">
+                <i class="material-icons search">&#xE8B6;</i> {l s='See product' d='Shop.Theme.Actions'}
+              </a>
+            {else}
+              <a class="quick-view js-quick-view" href="#" data-link-action="quickview">
+                <i class="material-icons search">&#xE8B6;</i> {l s='Quick view' d='Shop.Theme.Actions'}
+              </a>
+            {/if}
           {/block}
 
           {block name='product_variants'}
