@@ -1,6 +1,6 @@
 <div class="js-product-details tab-pane fade{if !$product.description} in active{/if}"
      id="product-details"
-     data-product="{$product.embedded_attributes|json_encode}"
+     data-product="{json_encode($product.embedded_attributes, JSON_UNESCAPED_UNICODE)}"
      role="tabpanel"
   >
   {block name='product_reference'}
