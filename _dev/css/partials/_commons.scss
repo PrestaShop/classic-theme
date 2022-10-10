@@ -420,6 +420,7 @@ form {
 
 .custom-checkbox {
   position: relative;
+  word-break: break-word;
 
   input[type="checkbox"] {
     position: absolute;
