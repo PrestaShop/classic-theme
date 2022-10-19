@@ -337,10 +337,14 @@
 
     .modal-body {
       display: flex;
-      margin-left: -30%;
+      margin-left: -35%;
 
       .product-cover-modal {
         background: $white;
+        @include media-breakpoint-down(md) {
+          max-width: 100%;
+          height: auto;
+        }
       }
 
       .image-caption {
@@ -371,7 +375,9 @@
       }
 
       .product-images {
-        margin-left: $extra-large-space;
+        @include media-breakpoint-up(lg) {
+          margin-left: $extra-large-space;
+        }
 
         img {
           width: 9.25rem;
