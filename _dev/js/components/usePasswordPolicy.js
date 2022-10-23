@@ -63,7 +63,7 @@ const getPasswordStrengthFeedback = (
   }
 };
 
-const watchPassword = (
+const watchPassword = async (
   elementInput,
   feedbackContainer,
   hints,
@@ -71,7 +71,7 @@ const watchPassword = (
   const {prestashop} = window;
   const passwordValue = elementInput.value;
   const elementIcon = feedbackContainer.querySelector(PasswordPolicyMap.requirementScoreIcon);
-  const result = prestashop.checkPasswordScore(passwordValue);
+  const result = await prestashop.checkPasswordScore(passwordValue);
   const feedback = getPasswordStrengthFeedback(result.score);
   const passwordLength = passwordValue.length;
   const popoverContent = [];
