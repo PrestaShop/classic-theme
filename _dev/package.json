@@ -15,7 +15,7 @@
   "license": "AFL-3.0",
   "devDependencies": {
     "@babel/eslint-parser": "^7.18.2",
-    "autoprefixer": "^6.7.7",
+    "autoprefixer": "^10.4.13",
     "bootstrap": "4.0.0-alpha.5",
     "bootstrap-touchspin": "^3.1.1",
     "bourbon": "^4.2.6",
@@ -36,7 +36,7 @@
     "material-design-icons-iconfont": "^5.0.1",
     "mini-css-extract-plugin": "^1.6.0",
     "node-sass": "^7.0.0",
-    "postcss-flexibility": "^1.0.2",
+    "postcss-flexibility": "^3.0.0",
     "postcss-loader": "^6.1.1",
     "sass-loader": "^13.0.0",
     "style-loader": "^3.2.1",
