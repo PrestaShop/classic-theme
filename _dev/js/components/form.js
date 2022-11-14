@@ -31,10 +31,10 @@ export default class Form {
   }
 
   parentFocus() {
-    $('.js-child-focus').focus(function () {
+    $('.js-child-focus').on('focus', function () {
       $(this).closest('.js-parent-focus').addClass('focus');
     });
-    $('.js-child-focus').focusout(function () {
+    $('.js-child-focus').on('focusout', function () {
       $(this).closest('.js-parent-focus').removeClass('focus');
     });
   }
