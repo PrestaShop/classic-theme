@@ -30,7 +30,7 @@
       method="POST"
       data-id-address="{$id_address}"
       action="{url entity='order' params=['id_address' => $id_address]}"
-      data-refresh-url="{url entity='order' params=['ajax' => 1, 'action' => 'addressForm']}"
+      data-refresh-url="{url entity='order' params=['ajax' => 1, 'action' => 'addressForm', 'id_address' => $id_address]}"
     >
 
       {if $use_same_address}
