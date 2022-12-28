@@ -132,5 +132,6 @@
       {/if}
 
     </form>
+    {hook h='displayAddressSelectorBottom'}
   </div>
 {/block}
