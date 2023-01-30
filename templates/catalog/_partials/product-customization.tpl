@@ -35,8 +35,8 @@
               <li class="product-customization-item">
                 <label for="field-{$field.input_name}">{$field.label}</label>
                 {if $field.type == 'text'}
-                  <textarea placeholder="{l s='Your message here' d='Shop.Forms.Help'}" class="product-message" maxlength="250" {if $field.required} required {/if} name="{$field.input_name}" id="field-{$field.input_name}"></textarea>
-                  <small class="float-xs-right">{l s='250 char. max' d='Shop.Forms.Help'}</small>
+                  <textarea placeholder="{l s='Your message here' d='Shop.Forms.Help'}" class="product-message" maxlength="1024" {if $field.required} required {/if} name="{$field.input_name}" id="field-{$field.input_name}"></textarea>
+                  <small class="float-xs-right">{l s='1024 char. max' d='Shop.Forms.Help'}</small>
                   {if $field.text !== ''}
                       <h6 class="customization-message">{l s='Your customization:' d='Shop.Theme.Catalog'}
                           <label class="customization-label">{$field.text}</label>
