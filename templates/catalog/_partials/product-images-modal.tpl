@@ -29,20 +29,28 @@
         {assign var=imagesCount value=$product.images|count}
         <figure>
           {if $product.default_image}
-            <img
-              class="js-modal-product-cover product-cover-modal"
-              width="{$product.default_image.bySize.large_default.width}"
-              src="{$product.default_image.bySize.large_default.url}"
-              {if !empty($product.default_image.legend)}
-                alt="{$product.default_image.legend}"
-                title="{$product.default_image.legend}"
-              {else}
-                alt="{$product.name}"
-              {/if}
-              height="{$product.default_image.bySize.large_default.height}"
-            >
+            <picture>
+              {if !empty($product.default_image.bySize.large_default.sources.avif)}<source srcset="{$product.default_image.bySize.large_default.sources.avif}" type="image/avif">{/if}
+              {if !empty($product.default_image.bySize.large_default.sources.webp)}<source srcset="{$product.default_image.bySize.large_default.sources.webp}" type="image/webp">{/if}
+              <img
+                class="js-modal-product-cover product-cover-modal"
+                width="{$product.default_image.bySize.large_default.width}"
+                src="{$product.default_image.bySize.large_default.url}"
+                {if !empty($product.default_image.legend)}
+                  alt="{$product.default_image.legend}"
+                  title="{$product.default_image.legend}"
+                {else}
+                  alt="{$product.name}"
+                {/if}
+                height="{$product.default_image.bySize.large_default.height}"
+              >
+            </picture>
           {else}
-            <img src="{$urls.no_picture_image.bySize.large_default.url}" loading="lazy" width="{$urls.no_picture_image.bySize.large_default.width}" height="{$urls.no_picture_image.bySize.large_default.height}" />
+            <picture>
+              {if !empty($urls.no_picture_image.bySize.large_default.sources.avif)}<source srcset="{$urls.no_picture_image.bySize.large_default.sources.avif}" type="image/avif">{/if}
+              {if !empty($urls.no_picture_image.bySize.large_default.sources.webp)}<source srcset="{$urls.no_picture_image.bySize.large_default.sources.webp}" type="image/webp">{/if}
+              <img src="{$urls.no_picture_image.bySize.large_default.url}" loading="lazy" width="{$urls.no_picture_image.bySize.large_default.width}" height="{$urls.no_picture_image.bySize.large_default.height}" />
+            </picture>
           {/if}
           <figcaption class="image-caption">
           {block name='product_description_short'}
@@ -56,19 +64,23 @@
               <ul class="product-images js-modal-product-images">
                 {foreach from=$product.images item=image}
                   <li class="thumb-container js-thumb-container">
-                    <img
-                      data-image-large-src="{$image.large.url}"
-                      class="thumb js-modal-thumb"
-                      src="{$image.medium.url}"
-                      {if !empty($image.legend)}
-                        alt="{$image.legend}"
-                        title="{$image.legend}"
-                      {else}
-                        alt="{$product.name}"
-                      {/if}
-                      width="{$image.medium.width}"
-                      height="148"
-                    >
+                    <picture>
+                      {if !empty($image.medium.sources.avif)}<source srcset="{$image.medium.sources.avif}" type="image/avif">{/if}
+                      {if !empty($image.medium.sources.webp)}<source srcset="{$image.medium.sources.webp}" type="image/webp">{/if}
+                      <img
+                        data-image-large-src="{$image.large.url}"
+                        class="thumb js-modal-thumb"
+                        src="{$image.medium.url}"
+                        {if !empty($image.legend)}
+                          alt="{$image.legend}"
+                          title="{$image.legend}"
+                        {else}
+                          alt="{$product.name}"
+                        {/if}
+                        width="{$image.medium.width}"
+                        height="148"
+                      >
+                    </picture>
                   </li>
                 {/foreach}
               </ul>

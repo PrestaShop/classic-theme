@@ -30,23 +30,31 @@
         {block name='product_thumbnail'}
           {if $product.cover}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
-              <img
-                src="{$product.cover.bySize.home_default.url}"
-                alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
-                loading="lazy"
-                data-full-size-image-url="{$product.cover.large.url}"
-                width="{$product.cover.bySize.home_default.width}"
-                height="{$product.cover.bySize.home_default.height}"
-              />
+              <picture>
+                {if !empty($product.cover.bySize.home_default.sources.avif)}<source srcset="{$product.cover.bySize.home_default.sources.avif}" type="image/avif">{/if}
+                {if !empty($product.cover.bySize.home_default.sources.webp)}<source srcset="{$product.cover.bySize.home_default.sources.webp}" type="image/webp">{/if}
+                <img
+                  src="{$product.cover.bySize.home_default.url}"
+                  alt="{if !empty($product.cover.legend)}{$product.cover.legend}{else}{$product.name|truncate:30:'...'}{/if}"
+                  loading="lazy"
+                  data-full-size-image-url="{$product.cover.large.url}"
+                  width="{$product.cover.bySize.home_default.width}"
+                  height="{$product.cover.bySize.home_default.height}"
+                />
+              </picture>
             </a>
           {else}
             <a href="{$product.url}" class="thumbnail product-thumbnail">
-              <img
-                src="{$urls.no_picture_image.bySize.home_default.url}"
-                loading="lazy"
-                width="{$urls.no_picture_image.bySize.home_default.width}"
-                height="{$urls.no_picture_image.bySize.home_default.height}"
-              />
+              <picture>
+                {if !empty($urls.no_picture_image.bySize.home_default.sources.avif)}<source srcset="{$urls.no_picture_image.bySize.home_default.sources.avif}" type="image/avif">{/if}
+                {if !empty($urls.no_picture_image.bySize.home_default.sources.webp)}<source srcset="{$urls.no_picture_image.bySize.home_default.sources.webp}" type="image/webp">{/if}
+                <img
+                  src="{$urls.no_picture_image.bySize.home_default.url}"
+                  loading="lazy"
+                  width="{$urls.no_picture_image.bySize.home_default.width}"
+                  height="{$urls.no_picture_image.bySize.home_default.height}"
+                />
+              </picture>
             </a>
           {/if}
         {/block}

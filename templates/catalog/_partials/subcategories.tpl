@@ -33,13 +33,17 @@
             <div class="subcategory-image">
               <a href="{$subcategory.url}" title="{$subcategory.name|escape:'html':'UTF-8'}" class="img">
                 {if !empty($subcategory.image.large.url)}
-                  <img
-                    class="img-fluid"
-                    src="{$subcategory.image.large.url}"
-                    alt="{$subcategory.name|escape:'html':'UTF-8'}"
-                    loading="lazy"
-                    width="{$subcategory.image.large.width}"
-                    height="{$subcategory.image.large.height}"/>
+                  <picture>
+                    {if !empty($subcategory.image.large.sources.avif)}<source srcset="{$subcategory.image.large.sources.avif}" type="image/avif">{/if}
+                    {if !empty($subcategory.image.large.sources.webp)}<source srcset="{$subcategory.image.large.sources.webp}" type="image/webp">{/if}
+                    <img
+                      class="img-fluid"
+                      src="{$subcategory.image.large.url}"
+                      alt="{$subcategory.name|escape:'html':'UTF-8'}"
+                      loading="lazy"
+                      width="{$subcategory.image.large.width}"
+                      height="{$subcategory.image.large.height}"/>
+                  </picture>
                 {/if}
               </a>
             </div>
