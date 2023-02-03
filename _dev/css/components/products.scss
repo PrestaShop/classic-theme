@@ -125,6 +125,7 @@
 
 .product-quantity {
   display: flex;
+  flex-wrap: wrap;
 
   .qty,
   .add {
@@ -162,6 +163,11 @@
   .btn-touchspin {
     height: 1.438rem;
   }
+}
+
+.wishlist-button-product {
+  // stylelint-disable-next-line
+  margin-left: 0.5rem !important;
 }
 
 .product-discounts {
