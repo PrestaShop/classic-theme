@@ -75,6 +75,7 @@ $(document).ready(() => {
       const sources = $(event.target).data('image-large-sources');
       const productCoverWebp = $(prestashop.themeSelectors.product.cover).siblings('source[type="image/webp"]');
       const productCoverAvif = $(prestashop.themeSelectors.product.cover).siblings('source[type="image/avif"]');
+
       if (sources !== undefined && sources.webp !== undefined && productCoverWebp.length) {
         productCoverWebp.attr('srcset', sources.webp);
       }

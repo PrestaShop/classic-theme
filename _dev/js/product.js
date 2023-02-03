@@ -56,6 +56,7 @@ $(document).ready(() => {
       const productCoverAvif = productCover.siblings('source[type="image/avif"]');
       const modalProductCoverWebp = modalProductCover.siblings('source[type="image/webp"]');
       const modalProductCoverAvif = modalProductCover.siblings('source[type="image/avif"]');
+
       if (sourcesMedium !== undefined && sourcesMedium.webp !== undefined && productCoverWebp.length) {
         productCoverWebp.attr('srcset', sourcesMedium.webp);
       }
