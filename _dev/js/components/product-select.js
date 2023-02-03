@@ -38,9 +38,11 @@ export default class ProductSelect {
           $('.js-modal-thumb').removeClass('selected');
         }
         $(event.currentTarget).addClass('selected');
-        $('.js-modal-product-cover').attr('src', $(event.target).data('image-large-src'));
-        $('.js-modal-product-cover').attr('title', $(event.target).attr('title'));
-        $('.js-modal-product-cover').attr('alt', $(event.target).attr('alt'));
+
+        // Change source, title and alt of the displayed image
+        $(prestashop.themeSelectors.product.modalProductCover).attr('src', $(event.target).data('image-large-src'));
+        $(prestashop.themeSelectors.product.modalProductCover).attr('title', $(event.target).attr('title'));
+        $(prestashop.themeSelectors.product.modalProductCover).attr('alt', $(event.target).attr('alt'));
       })
       .on('click', 'aside#thumbnails', (event) => {
         if (event.target.id === 'thumbnails') {

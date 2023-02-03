@@ -64,10 +64,11 @@ $(document).ready(() => {
         $(prestashop.themeSelectors.product.thumb).removeClass('selected');
       }
       $(event.currentTarget).addClass('selected');
-      $(prestashop.themeSelectors.product.cover).attr(
-        'src',
-        $(event.target).data('image-large-src'),
-      );
+
+      // Update cover source, alt and title
+      $(prestashop.themeSelectors.product.cover).attr('src', $(event.target).data('image-large-src'));
+      $(prestashop.themeSelectors.product.cover).attr('alt', $(event.target).attr('alt'));
+      $(prestashop.themeSelectors.product.cover).attr('title', $(event.target).attr('title'));
     });
     if ($thumbnails.find('li').length <= MAX_THUMBS) {
       $arrows.hide();

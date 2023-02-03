@@ -29,15 +29,25 @@ import ProductSelect from './components/product-select';
 $(document).ready(() => {
   function coverImage() {
     const productCover = $(prestashop.themeSelectors.product.cover);
+    const modalProductCover = $(prestashop.themeSelectors.product.modalProductCover);
     let thumbSelected = $(prestashop.themeSelectors.product.selected);
 
     const swipe = (selectedThumb, thumbParent) => {
       const newSelectedThumb = thumbParent.find(prestashop.themeSelectors.product.thumb);
 
-      $(prestashop.themeSelectors.product.modalProductCover).attr('src', newSelectedThumb.data('image-large-src'));
+      // Update thumbnail active classes
       selectedThumb.removeClass('selected');
       newSelectedThumb.addClass('selected');
+
+      // Update sources of both cover and modal cover
+      modalProductCover.prop('src', newSelectedThumb.data('image-large-src'));
       productCover.prop('src', newSelectedThumb.data('image-medium-src'));
+
+      // Update alt and title
+      productCover.attr('title', newSelectedThumb.attr('title'));
+      modalProductCover.attr('title', newSelectedThumb.attr('title'));
+      productCover.attr('alt', newSelectedThumb.attr('alt'));
+      modalProductCover.attr('alt', newSelectedThumb.attr('alt'));
     };
 
     $(prestashop.themeSelectors.product.thumb).on('click', (event) => {
