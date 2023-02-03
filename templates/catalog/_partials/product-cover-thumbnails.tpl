@@ -27,8 +27,8 @@
     <div class="product-cover">
       {if $product.default_image}
         <picture>
-          {if !empty($product.default_image.bySize.large_default.sources.avif)}<source srcset="{$product.default_image.bySize.large_default.sources.avif}" type="image/avif">{/if}
-          {if !empty($product.default_image.bySize.large_default.sources.webp)}<source srcset="{$product.default_image.bySize.large_default.sources.webp}" type="image/webp">{/if}
+          {*{if !empty($product.default_image.bySize.large_default.sources.avif)}<source srcset="{$product.default_image.bySize.large_default.sources.avif}" type="image/avif">{/if}
+          {if !empty($product.default_image.bySize.large_default.sources.webp)}<source srcset="{$product.default_image.bySize.large_default.sources.webp}" type="image/webp">{/if}*}
           <img
             class="js-qv-product-cover img-fluid"
             src="{$product.default_image.bySize.large_default.url}"
@@ -48,8 +48,8 @@
         </div>
       {else}
         <picture>
-          {if !empty($urls.no_picture_image.bySize.large_default.sources.avif)}<source srcset="{$urls.no_picture_image.bySize.large_default.sources.avif}" type="image/avif">{/if}
-          {if !empty($urls.no_picture_image.bySize.large_default.sources.webp)}<source srcset="{$urls.no_picture_image.bySize.large_default.sources.webp}" type="image/webp">{/if}
+          {*{if !empty($urls.no_picture_image.bySize.large_default.sources.avif)}<source srcset="{$urls.no_picture_image.bySize.large_default.sources.avif}" type="image/avif">{/if}
+          {if !empty($urls.no_picture_image.bySize.large_default.sources.webp)}<source srcset="{$urls.no_picture_image.bySize.large_default.sources.webp}" type="image/webp">{/if}*}
           <img
             class="img-fluid"
             src="{$urls.no_picture_image.bySize.large_default.url}"
@@ -73,7 +73,9 @@
               <img
                 class="thumb js-thumb {if $image.id_image == $product.default_image.id_image} selected js-thumb-selected {/if}"
                 data-image-medium-src="{$image.bySize.medium_default.url}"
+                data-image-medium-sources="{$image.bySize.medium_default.sources|@json_encode}"
                 data-image-large-src="{$image.bySize.large_default.url}"
+                data-image-large-sources="{$image.bySize.large_default.sources|@json_encode}"
                 src="{$image.bySize.small_default.url}"
                 {if !empty($image.legend)}
                   alt="{$image.legend}"
