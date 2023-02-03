@@ -34,15 +34,27 @@ export default class ProductSelect {
 
     $('body')
       .on('click', '.js-modal-thumb', (event) => {
+        // Swap active classes on thumbnail
         if ($('.js-modal-thumb').hasClass('selected')) {
           $('.js-modal-thumb').removeClass('selected');
         }
         $(event.currentTarget).addClass('selected');
 
-        // Change source, title and alt of the displayed image
+        // Get data from thumbnail and update cover src, alt and title
         $(prestashop.themeSelectors.product.modalProductCover).attr('src', $(event.target).data('image-large-src'));
         $(prestashop.themeSelectors.product.modalProductCover).attr('title', $(event.target).attr('title'));
         $(prestashop.themeSelectors.product.modalProductCover).attr('alt', $(event.target).attr('alt'));
+
+        // Get data from thumbnail and update cover sources
+        const sources = $(event.target).data('image-large-sources');
+        const productCoverWebp = $(prestashop.themeSelectors.product.modalProductCover).siblings('source[type="image/webp"]');
+        const productCoverAvif = $(prestashop.themeSelectors.product.modalProductCover).siblings('source[type="image/avif"]');
+        if (sources !== undefined && sources.webp !== undefined && productCoverWebp.length) {
+          productCoverWebp.attr('srcset', sources.webp);
+        }
+        if (sources !== undefined && sources.avif !== undefined && productCoverAvif.length) {
+          productCoverAvif.attr('srcset', sources.avif);
+        }
       })
       .on('click', 'aside#thumbnails', (event) => {
         if (event.target.id === 'thumbnails') {

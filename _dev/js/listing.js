@@ -60,15 +60,27 @@ $(document).ready(() => {
     const $arrows = $(prestashop.themeSelectors.product.arrows);
     const $thumbnails = qv.find('.js-qv-product-images');
     $(prestashop.themeSelectors.product.thumb).on('click', (event) => {
+      // Swap active classes on thumbnail
       if ($(prestashop.themeSelectors.product.thumb).hasClass('selected')) {
         $(prestashop.themeSelectors.product.thumb).removeClass('selected');
       }
       $(event.currentTarget).addClass('selected');
 
-      // Update cover source, alt and title
+      // Get data from thumbnail and update cover src, alt and title
       $(prestashop.themeSelectors.product.cover).attr('src', $(event.target).data('image-large-src'));
       $(prestashop.themeSelectors.product.cover).attr('alt', $(event.target).attr('alt'));
       $(prestashop.themeSelectors.product.cover).attr('title', $(event.target).attr('title'));
+
+      // Get data from thumbnail and update cover sources
+      const sources = $(event.target).data('image-large-sources');
+      const productCoverWebp = $(prestashop.themeSelectors.product.cover).siblings('source[type="image/webp"]');
+      const productCoverAvif = $(prestashop.themeSelectors.product.cover).siblings('source[type="image/avif"]');
+      if (sources !== undefined && sources.webp !== undefined && productCoverWebp.length) {
+        productCoverWebp.attr('srcset', sources.webp);
+      }
+      if (sources !== undefined && sources.avif !== undefined && productCoverAvif.length) {
+        productCoverAvif.attr('srcset', sources.avif);
+      }
     });
     if ($thumbnails.find('li').length <= MAX_THUMBS) {
       $arrows.hide();

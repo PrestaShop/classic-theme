@@ -35,7 +35,7 @@ $(document).ready(() => {
     const swipe = (selectedThumb, thumbParent) => {
       const newSelectedThumb = thumbParent.find(prestashop.themeSelectors.product.thumb);
 
-      // Update thumbnail active classes
+      // Swap active classes on thumbnail
       selectedThumb.removeClass('selected');
       newSelectedThumb.addClass('selected');
 
@@ -43,11 +43,31 @@ $(document).ready(() => {
       modalProductCover.prop('src', newSelectedThumb.data('image-large-src'));
       productCover.prop('src', newSelectedThumb.data('image-medium-src'));
 
-      // Update alt and title
+      // Get data from thumbnail and update cover src, alt and title
       productCover.attr('title', newSelectedThumb.attr('title'));
       modalProductCover.attr('title', newSelectedThumb.attr('title'));
       productCover.attr('alt', newSelectedThumb.attr('alt'));
       modalProductCover.attr('alt', newSelectedThumb.attr('alt'));
+
+      // Get data from thumbnail and update cover sources
+      const sourcesMedium = newSelectedThumb.data('image-medium-sources');
+      const sourcesLarge = newSelectedThumb.data('image-large-sources');
+      const productCoverWebp = productCover.siblings('source[type="image/webp"]');
+      const productCoverAvif = productCover.siblings('source[type="image/avif"]');
+      const modalProductCoverWebp = modalProductCover.siblings('source[type="image/webp"]');
+      const modalProductCoverAvif = modalProductCover.siblings('source[type="image/avif"]');
+      if (sourcesMedium !== undefined && sourcesMedium.webp !== undefined && productCoverWebp.length) {
+        productCoverWebp.attr('srcset', sourcesMedium.webp);
+      }
+      if (sourcesMedium !== undefined && sourcesMedium.avif !== undefined && productCoverAvif.length) {
+        productCoverAvif.attr('srcset', sourcesMedium.avif);
+      }
+      if (sourcesLarge !== undefined && sourcesLarge.webp !== undefined && modalProductCoverWebp.length) {
+        modalProductCoverWebp.attr('srcset', sourcesLarge.webp);
+      }
+      if (sourcesLarge !== undefined && sourcesLarge.avif !== undefined && modalProductCoverAvif.length) {
+        modalProductCoverAvif.attr('srcset', sourcesLarge.avif);
+      }
     };
 
     $(prestashop.themeSelectors.product.thumb).on('click', (event) => {
