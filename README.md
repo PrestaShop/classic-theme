@@ -1,5 +1,8 @@
 # Classic Theme
 
+[![Lint](https://github.com/PrestaShop/classic-theme/actions/workflows/lint.yml/badge.svg)](https://github.com/PrestaShop/classic-theme/actions/workflows/lint.yml)
+[![GitHub license](https://img.shields.io/github/license/PrestaShop/classic-theme)](https://github.com/PrestaShop/classic-theme/LICENSE.md)
+
 ## About
 
 This is the default theme that was originally introduced with PrestaShop 1.7. It has been extracted into a separate repository to make it optional in future PrestaShop versions.
