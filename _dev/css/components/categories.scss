@@ -448,7 +448,6 @@
 @include media-breakpoint-down(sm) {
   #category {
     #left-column {
-      width: 100%;
 
       #search_filters_wrapper {
         margin-right: -30px;
@@ -542,10 +541,6 @@
       }
     }
 
-    #content-wrapper {
-      width: 100%;
-    }
-
     #search_filter_toggler {
       width: 100%;
     }
@@ -567,12 +562,6 @@
     .showing {
       padding-top: 1rem;
     }
-  }
-
-  #prices-drop #content-wrapper,
-  #new-products #content-wrapper,
-  #best-sales #content-wrapper {
-    width: 100%;
   }
 }
 
@@ -613,7 +602,6 @@
     box-shadow: none;
   }
 }
-
 
 @include media-breakpoint-down(md) {
   #products {
