@@ -69,7 +69,7 @@
                       {if !empty($image.medium.sources.webp)}<source srcset="{$image.medium.sources.webp}" type="image/webp">{/if}
                       <img
                         data-image-large-src="{$image.large.url}"
-                        data-image-large-sources="{$image.large.sources|@json_encode}"
+                        {if !empty($image.large.sources)}data-image-large-sources="{$image.large.sources|@json_encode}"{/if}
                         class="thumb js-modal-thumb"
                         src="{$image.medium.url}"
                         {if !empty($image.legend)}

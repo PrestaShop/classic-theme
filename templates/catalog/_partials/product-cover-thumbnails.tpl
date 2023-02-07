@@ -73,9 +73,9 @@
               <img
                 class="thumb js-thumb {if $image.id_image == $product.default_image.id_image} selected js-thumb-selected {/if}"
                 data-image-medium-src="{$image.bySize.medium_default.url}"
-                data-image-medium-sources="{$image.bySize.medium_default.sources|@json_encode}"
+                {if !empty($image.bySize.medium_default.sources)}data-image-medium-sources="{$image.bySize.medium_default.sources|@json_encode}"{/if}
                 data-image-large-src="{$image.bySize.large_default.url}"
-                data-image-large-sources="{$image.bySize.large_default.sources|@json_encode}"
+                {if !empty($image.bySize.large_default.sources)}data-image-large-sources="{$image.bySize.large_default.sources|@json_encode}"{/if}
                 src="{$image.bySize.small_default.url}"
                 {if !empty($image.legend)}
                   alt="{$image.legend}"
