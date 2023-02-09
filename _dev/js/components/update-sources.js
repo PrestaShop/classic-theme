@@ -25,7 +25,7 @@
 import $ from 'jquery';
 
 export default function updateSources(img, sources) {
-  if (sources == undefined) {
+  if (sources === undefined) {
     return;
   }
 

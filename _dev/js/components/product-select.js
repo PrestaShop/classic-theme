@@ -48,8 +48,8 @@ export default class ProductSelect {
 
         // Get data from thumbnail and update cover sources
         updateSources(
-          $(prestashop.themeSelectors.product.modalProductCover), 
-          $(event.target).data('image-large-sources')
+          $(prestashop.themeSelectors.product.modalProductCover),
+          $(event.target).data('image-large-sources'),
         );
       })
       .on('click', 'aside#thumbnails', (event) => {

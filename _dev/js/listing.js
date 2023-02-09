@@ -73,8 +73,8 @@ $(document).ready(() => {
 
       // Get data from thumbnail and update cover sources
       updateSources(
-        $(prestashop.themeSelectors.product.cover), 
-        $(event.target).data('image-large-sources')
+        $(prestashop.themeSelectors.product.cover),
+        $(event.target).data('image-large-sources'),
       );
     });
     if ($thumbnails.find('li').length <= MAX_THUMBS) {
