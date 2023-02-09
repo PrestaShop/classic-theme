@@ -26,7 +26,7 @@ import $ from 'jquery';
 import prestashop from 'prestashop';
 // eslint-disable-next-line
 import "velocity-animate";
-
+import updateSources from './components/update-sources';
 import ProductMinitature from './components/product-miniature';
 
 $(document).ready(() => {
@@ -72,16 +72,10 @@ $(document).ready(() => {
       $(prestashop.themeSelectors.product.cover).attr('title', $(event.target).attr('title'));
 
       // Get data from thumbnail and update cover sources
-      const sources = $(event.target).data('image-large-sources');
-      const productCoverWebp = $(prestashop.themeSelectors.product.cover).siblings('source[type="image/webp"]');
-      const productCoverAvif = $(prestashop.themeSelectors.product.cover).siblings('source[type="image/avif"]');
-
-      if (sources !== undefined && sources.webp !== undefined && productCoverWebp.length) {
-        productCoverWebp.attr('srcset', sources.webp);
-      }
-      if (sources !== undefined && sources.avif !== undefined && productCoverAvif.length) {
-        productCoverAvif.attr('srcset', sources.avif);
-      }
+      updateSources(
+        $(prestashop.themeSelectors.product.cover), 
+        $(event.target).data('image-large-sources')
+      );
     });
     if ($thumbnails.find('li').length <= MAX_THUMBS) {
       $arrows.hide();

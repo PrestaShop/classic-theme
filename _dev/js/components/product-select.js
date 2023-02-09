@@ -25,6 +25,7 @@
 import $ from 'jquery';
 // eslint-disable-next-line
 import 'velocity-animate';
+import updateSources from 'update-sources';
 
 export default class ProductSelect {
   init() {
@@ -46,18 +47,10 @@ export default class ProductSelect {
         $(prestashop.themeSelectors.product.modalProductCover).attr('alt', $(event.target).attr('alt'));
 
         // Get data from thumbnail and update cover sources
-        const sources = $(event.target).data('image-large-sources');
-        const productCoverWebp = $(prestashop.themeSelectors.product.modalProductCover)
-          .siblings('source[type="image/webp"]');
-        const productCoverAvif = $(prestashop.themeSelectors.product.modalProductCover)
-          .siblings('source[type="image/avif"]');
-
-        if (sources !== undefined && sources.webp !== undefined && productCoverWebp.length) {
-          productCoverWebp.attr('srcset', sources.webp);
-        }
-        if (sources !== undefined && sources.avif !== undefined && productCoverAvif.length) {
-          productCoverAvif.attr('srcset', sources.avif);
-        }
+        updateSources(
+          $(prestashop.themeSelectors.product.modalProductCover), 
+          $(event.target).data('image-large-sources')
+        );
       })
       .on('click', 'aside#thumbnails', (event) => {
         if (event.target.id === 'thumbnails') {

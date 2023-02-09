@@ -25,6 +25,7 @@
 import $ from 'jquery';
 import prestashop from 'prestashop';
 import ProductSelect from './components/product-select';
+import updateSources from './components/update-sources';
 
 $(document).ready(() => {
   function coverImage() {
@@ -50,25 +51,8 @@ $(document).ready(() => {
       modalProductCover.attr('alt', newSelectedThumb.attr('alt'));
 
       // Get data from thumbnail and update cover sources
-      const sourcesMedium = newSelectedThumb.data('image-medium-sources');
-      const sourcesLarge = newSelectedThumb.data('image-large-sources');
-      const productCoverWebp = productCover.siblings('source[type="image/webp"]');
-      const productCoverAvif = productCover.siblings('source[type="image/avif"]');
-      const modalProductCoverWebp = modalProductCover.siblings('source[type="image/webp"]');
-      const modalProductCoverAvif = modalProductCover.siblings('source[type="image/avif"]');
-
-      if (sourcesMedium !== undefined && sourcesMedium.webp !== undefined && productCoverWebp.length) {
-        productCoverWebp.attr('srcset', sourcesMedium.webp);
-      }
-      if (sourcesMedium !== undefined && sourcesMedium.avif !== undefined && productCoverAvif.length) {
-        productCoverAvif.attr('srcset', sourcesMedium.avif);
-      }
-      if (sourcesLarge !== undefined && sourcesLarge.webp !== undefined && modalProductCoverWebp.length) {
-        modalProductCoverWebp.attr('srcset', sourcesLarge.webp);
-      }
-      if (sourcesLarge !== undefined && sourcesLarge.avif !== undefined && modalProductCoverAvif.length) {
-        modalProductCoverAvif.attr('srcset', sourcesLarge.avif);
-      }
+      updateSources(productCover, newSelectedThumb.data('image-medium-sources'));
+      updateSources(modalProductCover, newSelectedThumb.data('image-large-sources'));
     };
 
     $(prestashop.themeSelectors.product.thumb).on('click', (event) => {
