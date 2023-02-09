@@ -110,9 +110,6 @@
                       <option value="{$smarty.section.quantity.index}">{$smarty.section.quantity.index}</option>
                     {/section}
                   </select>
-                  {if $product.customizations}
-                    <input type="hidden" value="1" name="customization_qty_input[{$customization.id_customization}]" />
-                  {/if}
                 </div>
                 {/if}
             </td>
@@ -177,16 +174,9 @@
                       {$product.price}
                     </div>
                     <div class="col-xs-4">
-                      {if $product.customizations}
-                        {foreach $product.customizations as $customization}
-                          <div class="q">{l s='Quantity' d='Shop.Theme.Catalog'}: {$customization.quantity}</div>
-                          <div class="s" id="_mobile_return_qty_{$product.id_order_detail}_{$customization.id_customization}"></div>
-                        {/foreach}
-                      {else}
-                        <div class="q">{l s='Quantity' d='Shop.Theme.Catalog'}: {$product.quantity}</div>
-                        {if $product.quantity > $product.qty_returned}
-                          <div class="s" id="_mobile_return_qty_{$product.id_order_detail}"></div>
-                        {/if}
+                      <div class="q">{l s='Quantity' d='Shop.Theme.Catalog'}: {$product.quantity}</div>
+                      {if $product.quantity > $product.qty_returned}
+                        <div class="s" id="_mobile_return_qty_{$product.id_order_detail}"></div>
                       {/if}
                       {if $product.qty_returned > 0}
                         <div>{l s='Returned' d='Shop.Theme.Customeraccount'}: {$product.qty_returned}</div>
