@@ -25,6 +25,7 @@
 import $ from 'jquery';
 // eslint-disable-next-line
 import 'velocity-animate';
+import updateSources from 'update-sources';
 
 export default class ProductSelect {
   init() {
@@ -34,13 +35,22 @@ export default class ProductSelect {
 
     $('body')
       .on('click', '.js-modal-thumb', (event) => {
+        // Swap active classes on thumbnail
         if ($('.js-modal-thumb').hasClass('selected')) {
           $('.js-modal-thumb').removeClass('selected');
         }
         $(event.currentTarget).addClass('selected');
-        $('.js-modal-product-cover').attr('src', $(event.target).data('image-large-src'));
-        $('.js-modal-product-cover').attr('title', $(event.target).attr('title'));
-        $('.js-modal-product-cover').attr('alt', $(event.target).attr('alt'));
+
+        // Get data from thumbnail and update cover src, alt and title
+        $(prestashop.themeSelectors.product.modalProductCover).attr('src', $(event.target).data('image-large-src'));
+        $(prestashop.themeSelectors.product.modalProductCover).attr('title', $(event.target).attr('title'));
+        $(prestashop.themeSelectors.product.modalProductCover).attr('alt', $(event.target).attr('alt'));
+
+        // Get data from thumbnail and update cover sources
+        updateSources(
+          $(prestashop.themeSelectors.product.modalProductCover),
+          $(event.target).data('image-large-sources'),
+        );
       })
       .on('click', 'aside#thumbnails', (event) => {
         if (event.target.id === 'thumbnails') {

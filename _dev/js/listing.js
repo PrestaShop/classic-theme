@@ -26,7 +26,7 @@ import $ from 'jquery';
 import prestashop from 'prestashop';
 // eslint-disable-next-line
 import "velocity-animate";
-
+import updateSources from './components/update-sources';
 import ProductMinitature from './components/product-miniature';
 
 $(document).ready(() => {
@@ -60,13 +60,21 @@ $(document).ready(() => {
     const $arrows = $(prestashop.themeSelectors.product.arrows);
     const $thumbnails = qv.find('.js-qv-product-images');
     $(prestashop.themeSelectors.product.thumb).on('click', (event) => {
+      // Swap active classes on thumbnail
       if ($(prestashop.themeSelectors.product.thumb).hasClass('selected')) {
         $(prestashop.themeSelectors.product.thumb).removeClass('selected');
       }
       $(event.currentTarget).addClass('selected');
-      $(prestashop.themeSelectors.product.cover).attr(
-        'src',
-        $(event.target).data('image-large-src'),
+
+      // Get data from thumbnail and update cover src, alt and title
+      $(prestashop.themeSelectors.product.cover).attr('src', $(event.target).data('image-large-src'));
+      $(prestashop.themeSelectors.product.cover).attr('alt', $(event.target).attr('alt'));
+      $(prestashop.themeSelectors.product.cover).attr('title', $(event.target).attr('title'));
+
+      // Get data from thumbnail and update cover sources
+      updateSources(
+        $(prestashop.themeSelectors.product.cover),
+        $(event.target).data('image-large-sources'),
       );
     });
     if ($thumbnails.find('li').length <= MAX_THUMBS) {
