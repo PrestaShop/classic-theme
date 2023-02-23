@@ -34,7 +34,7 @@
       <thead class="thead-default">
         <tr>
           <th>{l s='Code' d='Shop.Theme.Checkout'}</th>
-          <th>{l s='Description' d='Shop.Theme.Checkout'}</th>
+          <th>{l s='Name' d='Shop.Theme.Checkout'}</th>
           <th>{l s='Quantity' d='Shop.Theme.Checkout'}</th>
           <th>{l s='Value' d='Shop.Theme.Checkout'}</th>
           <th>{l s='Minimum' d='Shop.Theme.Checkout'}</th>
