@@ -1,4 +1,4 @@
-{**
+/**
  * Copyright since 2007 PrestaShop SA and Contributors
  * PrestaShop is an International Registered Trademark & Property of PrestaShop SA
  *
@@ -21,17 +21,23 @@
  * @author    PrestaShop SA and Contributors <contact@prestashop.com>
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
- *}
-{extends file='layouts/layout-both-columns.tpl'}
+ */
+import $ from 'jquery';
 
-{block name='right_column'}{/block}
+export default function updateSources(img, sources) {
+  if (sources === undefined) {
+    return;
+  }
 
-{block name='content_wrapper'}
-  <div id="content-wrapper" class="js-content-wrapper left-column col-xs-12 col-md-8 col-lg-9">
-    {hook h="displayContentWrapperTop"}
-    {block name='content'}
-      <p>Hello world! This is HTML5 Boilerplate.</p>
-    {/block}
-    {hook h="displayContentWrapperBottom"}
-  </div>
-{/block}
+  // Get source siblings of the img tag
+  const imgSiblingWebp = $(img).siblings('source[type="image/webp"]');
+  const imgSiblingAvif = $(img).siblings('source[type="image/avif"]');
+
+  // Update them if they exist and we have a source for them
+  if (sources.webp !== undefined && imgSiblingWebp.length) {
+    imgSiblingWebp.attr('srcset', sources.webp);
+  }
+  if (sources.avif !== undefined && imgSiblingAvif.length) {
+    imgSiblingAvif.attr('srcset', sources.avif);
+  }
+}
