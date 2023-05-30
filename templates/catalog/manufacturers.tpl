@@ -22,21 +22,21 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
- {extends file=$layout}
- {block name='content'}
-   <section id="main">
- 
-     {block name='brand_header'}
-       <h1>{l s='Brands' d='Shop.Theme.Catalog'}</h1>
-     {/block}
- 
-     {block name='brand_miniature'}
-       <ul>
-         {foreach from=$brands item=brand}
-           {include file='catalog/_partials/miniatures/brand.tpl' brand=$brand}
-         {/foreach}
-       </ul>
-     {/block}
- 
-   </section>
- {/block}
+{extends file=$layout}
+{block name='content'}
+ <section id="main">
+
+   {block name='brand_header'}
+     <h1>{l s='Brands' d='Shop.Theme.Catalog'}</h1>
+   {/block}
+
+   {block name='brand_miniature'}
+     <ul>
+       {foreach from=$brands item=brand}
+         {include file='catalog/_partials/miniatures/brand.tpl' brand=$brand}
+       {/foreach}
+     </ul>
+   {/block}
+
+ </section>
+{/block}
