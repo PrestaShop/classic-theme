@@ -1,6 +1,6 @@
 {
     "name": "prestashop/classic",
-    "description": "Classic theme for PrestaShop 1.7",
+    "description": "Classic theme for develop PrestaShop version",
     "type": "prestashop-theme",
     "license": "AFL-3.0",
     "authors": [
