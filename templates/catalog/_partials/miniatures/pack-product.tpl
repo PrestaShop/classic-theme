@@ -35,8 +35,8 @@
                   {if !empty($product.default_image.medium.sources.webp)}<source srcset="{$product.default_image.medium.sources.webp}" type="image/webp">{/if}
                   <img
                           src="{$product.default_image.medium.url}"
-                          width="{$product.default_image.bySize.medium_default.width}"
-                          height="{$product.default_image.bySize.medium_default.height}"
+                          width="{$product.default_image.medium.width}"
+                          height="{$product.default_image.medium.height}"
                           {if !empty($product.default_image.legend)}
                             alt="{$product.default_image.legend}"
                             title="{$product.default_image.legend}"
