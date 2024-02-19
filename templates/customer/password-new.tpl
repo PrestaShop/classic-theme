@@ -51,10 +51,10 @@
             sprintf=['%email%' => $customer_email|stripslashes]}
         </div>
 
-        <div class="container-fluid">
+        <div class="container-fluid field-password-policy">
           <div class="row form-group">
             <label class="form-control-label col-md-3 offset-md-2">{l s='New password' d='Shop.Forms.Labels'}</label>
-            <div class="col-md-4">
+            <div class="col-md-4 js-input-column">
               <input class="form-control" type="password" data-validate="isPasswd" name="passwd" value="">
             </div>
           </div>
