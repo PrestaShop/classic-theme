@@ -26,11 +26,8 @@ import $ from 'jquery';
 import prestashop from 'prestashop';
 
 function initRmaItemSelector() {
-  $(`${prestashop.themeSelectors.order.returnForm} table thead input[type=checkbox]`).on('click', function () {
-    const checked = $(this).prop('checked');
-    $(`${prestashop.themeSelectors.order.returnForm} table tbody input[type=checkbox]`).each((_, checkbox) => {
-      $(checkbox).prop('checked', checked);
-    });
+  $(prestashop.themeSelectors.order.returnFormCheckAll).on('click', function () {
+    $(prestashop.themeSelectors.order.returnFormCheckItem).prop('checked', this.checked);
   });
 }
 
@@ -40,4 +37,4 @@ function setupCustomerScripts() {
   }
 }
 
-$(document).ready(setupCustomerScripts);
+$(setupCustomerScripts);

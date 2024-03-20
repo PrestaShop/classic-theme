@@ -68,7 +68,8 @@ prestashop.themeSelectors = {
     searchLink: '.js-search-link',
   },
   order: {
-    returnForm: '#order-return-form, .js-order-return-form',
+    returnFormCheckItem: '.js-order-return-check-item',
+    returnFormCheckAll: '.js-order-return-check-all',
   },
   arrowDown: '.arrow-down, .js-arrow-down',
   arrowUp: '.arrow-up, .js-arrow-up',
