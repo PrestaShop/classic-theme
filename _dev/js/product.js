@@ -131,7 +131,10 @@ $(document).ready(() => {
     $(prestashop.themeSelectors.touchspin).off('touchstart.touchspin');
 
     $quantityInput.on('focusout', () => {
-      if ($quantityInput.val() === '' || parseInt($quantityInput.val(), 10) < parseInt($quantityInput.attr('min'), 10)) {
+      if (
+        $quantityInput.val() === '' 
+        || parseInt($quantityInput.val(), 10) < parseInt($quantityInput.attr('min'), 10)
+      ) {
         $quantityInput.val($quantityInput.attr('min'));
         $quantityInput.trigger('change');
       }
