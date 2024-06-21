@@ -132,7 +132,7 @@ $(document).ready(() => {
 
     $quantityInput.on('focusout', () => {
       if (
-        $quantityInput.val() === '' 
+        $quantityInput.val() === ''
         || parseInt($quantityInput.val(), 10) < parseInt($quantityInput.attr('min'), 10)
       ) {
         $quantityInput.val($quantityInput.attr('min'));
