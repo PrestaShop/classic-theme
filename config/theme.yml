@@ -10,6 +10,7 @@ meta:
   compatibility:
     from: 9.0.0
     to: ~
+    framework: 'bootstrap-v4.0.0-alpha.5'
 
   available_layouts:
     layout-full-width:
