@@ -32,17 +32,29 @@
           <li>
             <div class="subcategory-image">
               <a href="{$subcategory.url}" title="{$subcategory.name|escape:'html':'UTF-8'}" class="img">
-                {if !empty($subcategory.image.large.url)}
+                {if !empty($subcategory.thumbnail.large.url)}
                   <picture>
-                    {if !empty($subcategory.image.large.sources.avif)}<source srcset="{$subcategory.image.large.sources.avif}" type="image/avif">{/if}
-                    {if !empty($subcategory.image.large.sources.webp)}<source srcset="{$subcategory.image.large.sources.webp}" type="image/webp">{/if}
+                    {if !empty($subcategory.thumbnail.large.sources.avif)}<source srcset="{$subcategory.thumbnail.large.sources.avif}" type="image/avif">{/if}
+                    {if !empty($subcategory.thumbnail.large.sources.webp)}<source srcset="{$subcategory.thumbnail.large.sources.webp}" type="image/webp">{/if}
                     <img
                       class="img-fluid"
-                      src="{$subcategory.image.large.url}"
+                      src="{$subcategory.thumbnail.large.url}"
                       alt="{$subcategory.name|escape:'html':'UTF-8'}"
                       loading="lazy"
-                      width="{$subcategory.image.large.width}"
-                      height="{$subcategory.image.large.height}"/>
+                      width="{$subcategory.thumbnail.large.width}"
+                      height="{$subcategory.thumbnail.large.height}"/>
+                  </picture>
+                {else}
+                  <picture>
+                    {if !empty($urls.no_picture_image.large.sources.avif)}<source srcset="{$urls.no_picture_image.large.sources.avif}" type="image/avif">{/if}
+                    {if !empty($urls.no_picture_image.large.sources.webp)}<source srcset="{$urls.no_picture_image.large.sources.webp}" type="image/webp">{/if}
+                    <img
+                      class="img-fluid"
+                      src="{$urls.no_picture_image.large.url}"
+                      alt="{$subcategory.name|escape:'html':'UTF-8'}"
+                      loading="lazy"
+                      width="{$urls.no_picture_image.large.width}"
+                      height="{$urls.no_picture_image.large.height}"/>
                   </picture>
                 {/if}
               </a>
