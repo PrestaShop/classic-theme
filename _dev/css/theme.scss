@@ -1,6 +1,6 @@
 /* stylelint-disable */
-@import "~bourbon/app/assets/stylesheets/bourbon";
 @import "partials/_variables";
+@import "~bourbon/core/bourbon";
 @import "~bootstrap/scss/bootstrap";
 @import "~bootstrap-touchspin/dist/jquery.bootstrap-touchspin.min.css";
 @import "partials/_mixins";

@@ -22,14 +22,15 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  */
-const webpack = require('webpack');
+
 const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
-const LicensePlugin = require('webpack-license-plugin');
+const LicensePlugin = require('webpack-license-plugin')
 
-let config = {
+const config = {
+  mode: process.env.NODE_ENV || 'development',
   entry: {
     theme: ['./js/theme.js', './css/theme.scss'],
     error: ['./css/error.scss'],
@@ -49,12 +50,12 @@ let config = {
       },
       {
         test: /\.scss$/,
-        use:[
-            MiniCssExtractPlugin.loader,
-            'css-loader',
-            'postcss-loader',
-            'sass-loader',
-          ],
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'postcss-loader',
+          'sass-loader',
+        ],
       },
       {
         test: /.(png|woff(2)?|eot|otf|ttf|svg|gif)(\?[a-z0-9=\.]+)?$/,
@@ -79,14 +80,14 @@ let config = {
     new CssoWebpackPlugin({
       forceMediaMerge: true,
     }),
-    new LicensePlugin({ 
+    new LicensePlugin({
       outputFilename: 'thirdPartyNotice.json',
       licenseOverrides: {
         'bootstrap-touchspin@3.1.1': 'Apache-2.0',
       },
       replenishDefaultLicenseTexts: true,
-    })
-  ]
+    }),
+  ],
 };
 
 if (process.env.NODE_ENV === 'production') {
