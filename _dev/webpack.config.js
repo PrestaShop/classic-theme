@@ -27,7 +27,7 @@ const path = require('path');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
-const LicensePlugin = require('webpack-license-plugin')
+const LicensePlugin = require('webpack-license-plugin');
 
 const config = {
   mode: process.env.NODE_ENV || 'development',
@@ -58,7 +58,7 @@ const config = {
         ],
       },
       {
-        test: /.(png|woff(2)?|eot|otf|ttf|svg|gif)(\?[a-z0-9=\.]+)?$/,
+        test: /.(png|woff(2)?|eot|otf|ttf|svg|gif)(\?[a-z0-9=.]+)?$/,
         type: 'asset/resource',
         generator: {
           filename: '../css/[hash][ext]',
