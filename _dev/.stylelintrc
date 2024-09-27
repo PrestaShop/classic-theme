@@ -3,6 +3,7 @@
     "stylelint-config-prestashop"
   ],
   "rules": {
+    "selector-id-pattern": null,
     "selector-max-id": null,
     "selector-max-class": null,
     "selector-max-type": null,
