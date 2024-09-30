@@ -233,10 +233,11 @@ textarea {
     $gray-light
     url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAQAAAD9CzEMAAAAPklEQVR4Ae3TwREAEBQD0V/6do4SXPZg7EsBhsQ8IEmSMOsiuEfg3gL3oXC7wK0bd1G4o8X9F4yIkyQfSrIByQBjp7QuND8AAAAASUVORK5CYII=")
     no-repeat scroll right 0.5rem center / 1.25rem 1.25rem;
-  /* stylelint-disable */
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -moz-appearance: none;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-appearance: none;
-  /* stylelint-enable */
+  appearance: none;
 }
 
 .form-control-valign {
@@ -599,7 +600,6 @@ form {
 .modal-dialog-centered {
   display: flex;
   align-items: center;
-  // 30px corresponds to the default margin size from bootstrap 4.0.0-alpha.5 for modal-dialog class
   min-height: calc(100% - (30px * 2));
 }
 
@@ -608,17 +608,19 @@ form {
 }
 
 input[type="number"] {
-  /* stylelint-disable */
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -moz-appearance: textfield;
+  appearance: textfield;
 
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     margin: 0;
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-appearance: none;
   }
-  /* stylelint-enable */
 }
 
 .ui-autocomplete.ui-front {
   z-index: 999;
 }
+
