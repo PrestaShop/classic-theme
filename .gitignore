@@ -1,6 +1,7 @@
 /vendor/
 node_modules
 assets
+export
 
 #vscode config
 .hintrc
