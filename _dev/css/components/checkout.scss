@@ -369,10 +369,6 @@ body#checkout {
     }
 
     .delivery-options {
-      > .row {
-        border-right: 0.1rem solid darken($gray-lighter, 20%);
-      }
-
       .delivery-option {
         min-height: 80px;
         padding: 0.9375rem 0;
@@ -406,6 +402,10 @@ body#checkout {
         img {
           width: 3.125rem;
         }
+      }
+
+      .carrier-extra-content {
+        padding-block-end: 1rem;
       }
     }
 
