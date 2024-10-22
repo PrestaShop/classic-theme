@@ -29,7 +29,9 @@
       <table id="order-products" class="table table-bordered return">
         <thead class="thead-default">
           <tr>
-            <th class="head-checkbox"><input type="checkbox"/></th>
+            <th class="head-checkbox">
+              <input type="checkbox" class="js-order-return-check-all">
+            </th>
             <th>{l s='Product' d='Shop.Theme.Catalog'}</th>
             <th>{l s='Quantity' d='Shop.Theme.Catalog'}</th>
             <th>{l s='Returned' d='Shop.Theme.Customeraccount'}</th>
@@ -42,7 +44,13 @@
             <td>
               {if !$product.is_virtual}
                 <span id="_desktop_product_line_{$product.id_order_detail}">
-                  <input type="checkbox" id="cb_{$product.id_order_detail}" name="ids_order_detail[{$product.id_order_detail}]" value="{$product.id_order_detail}">
+                  <input
+                    id="cb_{$product.id_order_detail}"
+                    class="js-order-return-check-item"
+                    name="ids_order_detail[{$product.id_order_detail}]"
+                    type="checkbox"
+                    value="{$product.id_order_detail}"
+                  >
                 </span>
               {/if}
             </td>
