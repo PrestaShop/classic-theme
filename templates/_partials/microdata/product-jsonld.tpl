@@ -90,10 +90,10 @@
       "sku": "{if $product.reference}{$product.reference}{else}{$product.id}{/if}",
       "mpn": "{if $product.mpn}{$product.mpn}{elseif $product.reference}{$product.reference}{else}{$product.id}{/if}",
       {if $product.ean13}"gtin13": "{$product.ean13}",{elseif $product.upc}"gtin13": "0{$product.upc}",{/if}
-      {if $product.condition == 'new'}"itemCondition": "https://schema.org/NewCondition",{/if}
+      {if $product.condition.type == 'new'}"itemCondition": "https://schema.org/NewCondition",{/if}
       {if $product.show_condition > 0}
-        {if $product.condition == 'used'}"itemCondition": "https://schema.org/UsedCondition",{/if}
-        {if $product.condition == 'refurbished'}"itemCondition": "https://schema.org/RefurbishedCondition",{/if}
+        {if $product.condition.type == 'used'}"itemCondition": "https://schema.org/UsedCondition",{/if}
+        {if $product.condition.type == 'refurbished'}"itemCondition": "https://schema.org/RefurbishedCondition",{/if}
       {/if}
       "availability": "{$product.seo_availability}",
       "seller": {
