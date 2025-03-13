@@ -9,6 +9,7 @@ Branches on this repository follow PrestaShop Core branches
 
 - branch `2.0.x` follows development of PrestaShop `8.0.x` branch
 - branch `2.1.x` follows development of PrestaShop `8.1.x` branch
+- branch `2.2.x` follows development of PrestaShop `8.2.x` branch
 - branch `develop` follows development of PrestaShop `develop` branch
 
 That means changes in branch `2.1.x` branch will be delivered with PrestaShop 8.1.x versions.
