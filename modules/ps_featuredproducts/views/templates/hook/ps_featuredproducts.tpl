@@ -22,7 +22,7 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-<section class="featured-products clearfix">
+<section class="featured-products clearfix" data-type="popularproducts">
   <h2 class="h2 products-section-title text-uppercase">
     {l s='Popular Products' d='Shop.Theme.Catalog'}
   </h2>
