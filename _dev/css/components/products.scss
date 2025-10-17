@@ -125,6 +125,7 @@
 
 .product-quantity {
   display: flex;
+  flex-wrap: wrap;
 
   .qty,
   .add {
@@ -162,6 +163,11 @@
   .btn-touchspin {
     height: 1.438rem;
   }
+}
+
+.wishlist-button-product {
+  // stylelint-disable-next-line
+  margin-left: 0.5rem !important;
 }
 
 .product-discounts {
@@ -615,20 +621,20 @@
   margin-top: 0.625rem;
   font-weight: 700;
 
-  .material-icons {
-    line-height: inherit;
+  .alert {
+    font-size: 1rem;
   }
 
-  .product-available {
-    color: $brand-success;
+  .alert-content-wrapper {
+    display: flex;
+    gap: 0.75rem;
   }
 
-  .product-unavailable {
-    color: $brand-warning;
-  }
-
-  .product-last-items {
-    color: $brand-warning;
+  /* Reset some of the general styles on alert warning */
+  .alert-warning .material-icons {
+    padding-top: 0;
+    margin-right: 0;
+    font-size: 24px;
   }
 }
 

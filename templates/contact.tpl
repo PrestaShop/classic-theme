@@ -32,7 +32,7 @@
       {hook h='displayContactLeftColumn'}
     </div>
   {/block}
-{else if $layout === 'layouts/layout-right-column.tpl'}
+{elseif $layout === 'layouts/layout-right-column.tpl'}
   {block name="right_column"}
     <div id="right-column" class="col-xs-12 col-md-4 col-lg-3">
       {hook h='displayContactRightColumn'}
