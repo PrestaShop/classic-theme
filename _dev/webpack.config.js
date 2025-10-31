@@ -24,10 +24,12 @@
  */
 
 const path = require('path');
+
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const CssoWebpackPlugin = require('csso-webpack-plugin').default;
 const LicensePlugin = require('webpack-license-plugin');
+const webpack = require('webpack');
 
 const config = {
   mode: process.env.NODE_ENV || 'development',
@@ -86,6 +88,9 @@ const config = {
         'bootstrap-touchspin@3.1.1': 'Apache-2.0',
       },
       replenishDefaultLicenseTexts: true,
+    }),
+    new webpack.ProvidePlugin({
+      Tether: 'tether',
     }),
   ],
 };
