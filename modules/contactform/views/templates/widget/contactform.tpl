@@ -128,6 +128,8 @@
         </style>
         <input type="text" name="url" value=""/>
         <input type="hidden" name="token" value="{$token}" />
+        {hook h='displayFormCaptcha'}
+        {/block}
         <input class="btn btn-primary" type="submit" name="submitMessage" value="{l s='Send' d='Shop.Theme.Actions'}">
       </footer>
     {/if}
