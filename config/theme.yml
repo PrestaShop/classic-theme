@@ -66,11 +66,13 @@ global_settings:
         - ~
       displayAdminCustomers:
         - blockwishlist
+        - ps_emailsubscription
         # Keep existing hooks and append them after
         - ~
       displayCustomerAccount:
         - blockwishlist
         - psgdpr
+        - ps_emailalerts
         # Keep existing hooks and append them after
         - ~
       displayMyAccountBlock:
@@ -91,6 +93,7 @@ global_settings:
       displayTop:
         - ps_mainmenu
         - ps_searchbar
+        - pagesnotfound
         # Keep existing hooks and append them after
         - ~
       displayHome:
@@ -114,6 +117,7 @@ global_settings:
         - ps_customeraccountlinks
         - ps_contactinfo
         - blockwishlist
+        - ps_socialfollow
         # Keep existing hooks and append them after
         - ~
       displayFooterAfter:
@@ -122,11 +126,18 @@ global_settings:
         - ~
       displayFooterProduct:
         - productcomments
+        - ps_categoryproducts
+        - ps_crossselling
+        - ps_googleanalytics
+        - ps_viewedproduct
         # Keep existing hooks and append them after
         - ~
       displayLeftColumn:
         - ps_categorytree
         - ps_facetedsearch
+        - ps_brandlist
+        - ps_contactinfo
+        - ps_supplierlist
         # Keep existing hooks and append them after
         - ~
       displayContactLeftColumn:
@@ -139,6 +150,7 @@ global_settings:
         - ~
       displayContactContent:
         - contactform
+        - ps_contactinfo
         # Keep existing hooks and append them after
         - ~
       displaySearch:
@@ -148,6 +160,8 @@ global_settings:
       displayProductAdditionalInfo:
         - ps_sharebuttons
         - productcomments
+        - ps_emailalerts
+        - ps_viewedproduct
         # Keep existing hooks and append them after
         - ~
       displayProductListReviews:
