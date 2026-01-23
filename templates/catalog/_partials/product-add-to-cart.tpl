@@ -35,13 +35,8 @@
             id="quantity_wanted"
             inputmode="numeric"
             pattern="[0-9]*"
-            {if $product.quantity_wanted}
-              value="{$product.quantity_wanted}"
-              min="{$product.minimal_quantity}"
-            {else}
-              value="1"
-              min="1"
-            {/if}
+            value="{if $product.quantity_wanted}{$product.quantity_wanted}{else}1{/if}"
+            min="{if $product.quantity_required}{$product.quantity_required}{else}1{/if}"
             class="input-group"
             aria-label="{l s='Quantity' d='Shop.Theme.Actions'}"
           >
