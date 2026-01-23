@@ -90,15 +90,7 @@
       "sku": "{if $product.reference}{$product.reference}{else}{$product.id}{/if}",
       "mpn": "{if $product.mpn}{$product.mpn}{elseif $product.reference}{$product.reference}{else}{$product.id}{/if}",
       {if $product.ean13}"gtin13": "{$product.ean13}",{elseif $product.upc}"gtin13": "0{$product.upc}",{/if}
-      {*
-       * If show_condition is false, product.condition is a string (e.g. "new").
-       * If show_condition is true, product.condition is an array with keys type, label and schema_url
-       *}
-      {if $product.condition == 'new'}
-      "itemCondition": "https://schema.org/NewCondition",
-      {elseif !empty($product.show_condition)}
-      "itemCondition": "{$product.condition.schema_url}",
-      {/if}
+      {if !empty($product.show_condition) && !empty($product.condition)}"itemCondition": "{$product.condition.schema_url}",{/if}
       "availability": "{$product.seo_availability}",
       "seller": {
         "@type": "Organization",
