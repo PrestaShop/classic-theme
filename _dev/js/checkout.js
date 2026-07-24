@@ -79,7 +79,7 @@ $(document).ready(() => {
     // Show the one related to the selected carrier
     const carrierExtraContent = params.deliveryOption.next(prestashop.themeSelectors.checkout.carrierExtraContent);
 
-    if (carrierExtraContent.html().trim() !== '') {
+    if (carrierExtraContent.length && carrierExtraContent.html().trim() !== '') {
       carrierExtraContent.slideDown();
     }
   });
