@@ -36,9 +36,12 @@ $(document).ready(() => {
     const swipe = (selectedThumb, thumbParent) => {
       const newSelectedThumb = thumbParent.find(prestashop.themeSelectors.product.thumb);
 
-      // Swap active classes on thumbnail
-      selectedThumb.removeClass('selected');
-      newSelectedThumb.addClass('selected');
+      // Swap active classes on thumbnail. Both have to move together: "selected" carries the
+      // styling and "js-thumb-selected" is what themeSelectors.product.selected looks for, so
+      // dropping only one of them leaves the previous thumbnail matching that selector and the
+      // next swipe acts on a growing set of thumbnails.
+      selectedThumb.removeClass('selected js-thumb-selected');
+      newSelectedThumb.addClass('selected js-thumb-selected');
 
       // Update sources of both cover and modal cover
       modalProductCover.prop('src', newSelectedThumb.data('image-large-src'));
