@@ -39,6 +39,8 @@
             min="{if $product.quantity_required}{$product.quantity_required}{else}1{/if}"
             class="input-group"
             aria-label="{l s='Quantity' d='Shop.Theme.Actions'}"
+            data-increase-label="{l s='Increase quantity' d='Shop.Theme.Actions'}"
+            data-decrease-label="{l s='Decrease quantity' d='Shop.Theme.Actions'}"
           >
         </div>
 
