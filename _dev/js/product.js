@@ -24,6 +24,7 @@
  */
 import $ from 'jquery';
 import prestashop from 'prestashop';
+import applyTouchspinLabels from './components/touchspin-labels';
 import ProductSelect from './components/product-select';
 import updateSources from './components/update-sources';
 
@@ -127,6 +128,8 @@ $(document).ready(() => {
       min: parseInt($quantityInput.attr('min'), 10),
       max: 1000000,
     });
+
+    applyTouchspinLabels($quantityInput);
 
     $(prestashop.themeSelectors.touchspin).off('touchstart.touchspin');
 
