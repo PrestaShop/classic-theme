@@ -35,6 +35,7 @@
               type="radio"
               name="{$name}"
               value="{$address.id}"
+              {if isset($form_id)}form="{$form_id}"{/if}
               {if $address.id == $selected}checked{/if}
             >
             <span></span>
@@ -66,7 +67,7 @@
   {/foreach}
   {if $interactive}
     <p>
-      <button class="ps-hidden-by-js form-control-submit center-block" type="submit">{l s='Save' d='Shop.Theme.Actions'}</button>
+      <button class="ps-hidden-by-js form-control-submit center-block" type="submit"{if isset($form_id)} form="{$form_id}"{/if}>{l s='Save' d='Shop.Theme.Actions'}</button>
     </p>
   {/if}
 {/block}
