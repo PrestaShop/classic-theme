@@ -139,6 +139,13 @@
             {/block}
 
             {block name='product_tabs'}
+              {* Rendered up front so the nav can tell whether the Product Details tab has anything to show.
+                 The partial decides that itself and returns nothing when it does not. *}
+              {capture name='product_details_pane'}
+                {block name='product_details'}
+                  {include file='catalog/_partials/product-details.tpl'}
+                {/block}
+              {/capture}
               <div class="tabs">
                 <ul class="nav nav-tabs" role="tablist">
                   {if $product.description}
@@ -152,15 +159,17 @@
                          {if $product.description} aria-selected="true"{/if}>{l s='Description' d='Shop.Theme.Catalog'}</a>
                     </li>
                   {/if}
-                  <li class="nav-item">
-                    <a
-                      class="nav-link{if !$product.description} active js-product-nav-active{/if}"
-                      data-toggle="tab"
-                      href="#product-details"
-                      role="tab"
-                      aria-controls="product-details"
-                      {if !$product.description} aria-selected="true"{/if}>{l s='Product Details' d='Shop.Theme.Catalog'}</a>
-                  </li>
+                  {if $product_details_has_content || !$product.description}
+                    <li class="nav-item">
+                      <a
+                        class="nav-link{if !$product.description} active js-product-nav-active{/if}"
+                        data-toggle="tab"
+                        href="#product-details"
+                        role="tab"
+                        aria-controls="product-details"
+                        {if !$product.description} aria-selected="true"{/if}>{l s='Product Details' d='Shop.Theme.Catalog'}</a>
+                    </li>
+                  {/if}
                   {if $product.attachments}
                     <li class="nav-item">
                       <a
@@ -190,9 +199,7 @@
                    {/block}
                  </div>
 
-                 {block name='product_details'}
-                   {include file='catalog/_partials/product-details.tpl'}
-                 {/block}
+                 {$smarty.capture.product_details_pane nofilter}
 
                  {block name='product_attachments'}
                    {if $product.attachments}
