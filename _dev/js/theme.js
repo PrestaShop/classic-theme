@@ -23,7 +23,11 @@
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  */
 /* eslint-disable */
-import 'expose-loader?exposes=Tether!tether';
+// tether 2.x ships an ES module whose default export is the class, and webpack resolves it through
+// the package's `module` field, so exposing the import itself puts the namespace object on
+// window.Tether - `new Tether(...)` then throws "Tether is not a constructor" and Bootstrap's
+// tooltips and popovers stay broken. `|default` exposes the export instead of the namespace.
+import 'expose-loader?exposes=Tether|default!tether';
 import 'bootstrap/dist/js/bootstrap.min';
 import 'flexibility';
 import 'bootstrap-touchspin';
