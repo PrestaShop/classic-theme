@@ -118,6 +118,12 @@
         {block name='product_reviews'}
           {hook h='displayProductListReviews' product=$product}
         {/block}
+
+        {block name='product_availability_submessage'}
+          {if !empty($product.availability_submessage)}
+            <div class="product-availability-submessage"><small>{$product.availability_submessage}</small></div>
+          {/if}
+        {/block}
       </div>
 
       {include file='catalog/_partials/product-flags.tpl'}
