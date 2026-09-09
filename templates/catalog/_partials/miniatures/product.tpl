@@ -115,12 +115,17 @@
           {/if}
         {/block}
 
+        {block name='product_availability'}
+          {include file='catalog/_partials/product-availability-status.tpl' product=$product}
+        {/block}
+
         {block name='product_reviews'}
           {hook h='displayProductListReviews' product=$product}
         {/block}
       </div>
 
-      {include file='catalog/_partials/product-flags.tpl'}
+      {** The stock label above says the same thing, in the same words, so only one of them shows *}
+      {include file='catalog/_partials/product-flags.tpl' hideOutOfStockFlag=!empty($product.availability_message)}
     </div>
   </article>
 </div>

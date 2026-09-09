@@ -22,10 +22,23 @@
  * @copyright Since 2007 PrestaShop SA and Contributors
  * @license   https://opensource.org/licenses/AFL-3.0 Academic Free License 3.0 (AFL-3.0)
  *}
-{block name='product_flags'}
-    <ul class="product-flags js-product-flags">
-        {foreach from=$product.flags item=flag}
-            <li class="product-flag {$flag.type}">{$flag.label}</li>
-        {/foreach}
-    </ul>
-{/block}
+{**
+ * $hideOutOfStockFlag lets a caller that already renders the stock label drop the flag saying the same
+ * thing. Filtering first so an empty list renders no list at all.
+ *}
+{assign 'visibleFlags' []}
+{foreach from=$product.flags|default:[] item=flag}
+    {if !($hideOutOfStockFlag|default:false) || $flag.type != 'out_of_stock'}
+        {append 'visibleFlags' $flag}
+    {/if}
+{/foreach}
+
+{if !empty($visibleFlags)}
+    {block name='product_flags'}
+        <ul class="product-flags js-product-flags">
+            {foreach from=$visibleFlags item=flag}
+                <li class="product-flag {$flag.type}">{$flag.label}</li>
+            {/foreach}
+        </ul>
+    {/block}
+{/if}
