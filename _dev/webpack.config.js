@@ -36,8 +36,8 @@ const config = {
     error: ['./css/error.scss'],
   },
   output: {
-    path: path.resolve(__dirname, '../assets/js'),
-    filename: '[name].js',
+    path: path.resolve(__dirname, '../assets'),
+    filename: 'js/[name].js',
   },
   resolve: {
     preferRelative: true,
@@ -61,7 +61,7 @@ const config = {
         test: /.(png|woff(2)?|eot|otf|ttf|svg|gif)(\?[a-z0-9=.]+)?$/,
         type: 'asset/resource',
         generator: {
-          filename: '../css/[hash][ext]',
+          filename: 'css/[hash][ext]',
         },
       },
       {
@@ -76,12 +76,15 @@ const config = {
     jquery: 'jQuery',
   },
   plugins: [
-    new MiniCssExtractPlugin({filename: path.join('..', 'css', '[name].css')}),
+    // Use the child compiler (mini-css-extract-plugin 1.x behaviour) instead of importModule,
+    // otherwise packages only used from CSS (manrope, material-design-icons-iconfont)
+    // are missing from thirdPartyNotice.json
+    new MiniCssExtractPlugin({filename: 'css/[name].css', experimentalUseImportModule: false}),
     new CssoWebpackPlugin({
       forceMediaMerge: true,
     }),
     new LicensePlugin({
-      outputFilename: 'thirdPartyNotice.json',
+      outputFilename: 'js/thirdPartyNotice.json',
       licenseOverrides: {
         'bootstrap-touchspin@3.1.1': 'Apache-2.0',
       },
