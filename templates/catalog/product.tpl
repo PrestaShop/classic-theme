@@ -82,7 +82,7 @@
 
           <div class="product-information">
             {block name='product_description_short'}
-              <div id="product-description-short-{$product.id}" class="product-description">{$product.description_short nofilter}</div>
+              <div id="product-description-short-{$product.id}" class="product-description js-product-description-short">{$product.description_short nofilter}</div>
             {/block}
 
             {if $product.is_customizable && count($product.customizations.fields)}
@@ -186,7 +186,7 @@
                 <div class="tab-content" id="tab-content">
                  <div class="tab-pane fade in{if $product.description} active js-product-tab-active{/if}" id="description" role="tabpanel">
                    {block name='product_description'}
-                     <div class="product-description">{$product.description nofilter}</div>
+                     <div class="product-description js-product-description">{$product.description nofilter}</div>
                    {/block}
                  </div>
 
