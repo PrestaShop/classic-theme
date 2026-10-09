@@ -49,6 +49,10 @@ assets:
 
 
 global_settings:
+  csp:
+    # Bootstrap 4.0.0-alpha.5 Util.reflow() uses new Function(); required under CSP enforcement.
+    script-src:
+      - "'unsafe-eval'"
   configuration:
     PS_IMAGE_QUALITY: png
   modules:
