@@ -214,10 +214,18 @@ $(document).ready(() => {
     productMinitature.init();
   }
 
+  /*
+   * Paging is the one case where the reader expects to be taken back to the top of the list, because
+   * the products they were looking at are gone. Narrowing a filter keeps most of them, so moving the
+   * page loses the spot they were reading from.
+   */
+  let scrollToListAfterUpdate = false;
+
   $('body').on(
     'change',
     `${prestashop.themeSelectors.listing.searchFilters} input[data-search-url]`,
     (event) => {
+      scrollToListAfterUpdate = false;
       prestashop.emit('updateFacets', parseSearchUrl(event));
     },
   );
@@ -226,12 +234,14 @@ $(document).ready(() => {
     'click',
     prestashop.themeSelectors.listing.searchFiltersClearAll,
     (event) => {
+      scrollToListAfterUpdate = false;
       prestashop.emit('updateFacets', parseSearchUrl(event));
     },
   );
 
   $('body').on('click', prestashop.themeSelectors.listing.searchLink, (event) => {
     event.preventDefault();
+    scrollToListAfterUpdate = $(event.target).closest('.pagination').length > 0;
     prestashop.emit(
       'updateFacets',
       $(event.target)
@@ -250,6 +260,7 @@ $(document).ready(() => {
     'change',
     `${prestashop.themeSelectors.listing.searchFilters} select`,
     (event) => {
+      scrollToListAfterUpdate = false;
       const form = $(event.target).closest('form');
       prestashop.emit('updateFacets', `?${form.serialize()}`);
     },
@@ -257,6 +268,17 @@ $(document).ready(() => {
 
   prestashop.on('updateProductList', (data) => {
     updateProductListDOM(data);
-    window.scrollTo(0, 0);
+
+    if (scrollToListAfterUpdate) {
+      const listHeader = document.querySelector(
+        prestashop.themeSelectors.listing.listHeader,
+      );
+
+      if (listHeader) {
+        listHeader.scrollIntoView({block: 'start', behavior: 'auto'});
+      }
+
+      scrollToListAfterUpdate = false;
+    }
   });
 });
