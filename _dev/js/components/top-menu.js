@@ -70,8 +70,12 @@ export default class TopMenu extends DropDown {
   }
 
   toggleMobileMenu() {
-    $('#header').toggleClass('is-open');
-    if ($('#mobile_top_menu_wrapper').is(':visible')) {
+    // Called both when the menu is toggled and on every breakpoint crossing,
+    // so the state has to be read rather than flipped.
+    const isMobileMenuOpen = $('#mobile_top_menu_wrapper').is(':visible');
+
+    $('#header').toggleClass('is-open', isMobileMenuOpen);
+    if (isMobileMenuOpen) {
       $('#notifications, #wrapper, #footer').hide();
     } else {
       $('#notifications, #wrapper, #footer').show();
