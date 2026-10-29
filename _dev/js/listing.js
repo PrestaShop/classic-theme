@@ -24,6 +24,7 @@
  */
 import $ from 'jquery';
 import prestashop from 'prestashop';
+import applyTouchspinLabels from './components/touchspin-labels';
 // eslint-disable-next-line
 import "velocity-animate";
 import updateSources from './components/update-sources';
@@ -106,6 +107,8 @@ $(document).ready(() => {
       min: 1,
       max: 1000000,
     });
+
+    applyTouchspinLabels(qv.find(prestashop.selectors.quantityWanted));
 
     $(prestashop.themeSelectors.touchspin).off('touchstart.touchspin');
   };

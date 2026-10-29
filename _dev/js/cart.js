@@ -1,5 +1,6 @@
 import $ from 'jquery';
 import prestashop from 'prestashop';
+import applyTouchspinLabels from './components/touchspin-labels';
 import debounce from './components/debounce';
 
 prestashop.cart = prestashop.cart || {};
@@ -79,6 +80,8 @@ function createSpin() {
       min: parseInt($(spinner).attr('min'), 10),
       max: 1000000,
     });
+
+    applyTouchspinLabels($(spinner));
   });
 
   $(prestashop.themeSelectors.touchspin).off('touchstart.touchspin');

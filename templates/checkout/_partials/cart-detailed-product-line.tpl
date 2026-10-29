@@ -136,6 +136,8 @@
             {else}
               <input
                 class="js-cart-line-product-quantity"
+                data-increase-label="{l s='Increase quantity' d='Shop.Theme.Actions'}"
+                data-decrease-label="{l s='Decrease quantity' d='Shop.Theme.Actions'}"
                 data-down-url="{$product.down_quantity_url}"
                 data-up-url="{$product.up_quantity_url}"
                 data-update-url="{$product.update_quantity_url}"
