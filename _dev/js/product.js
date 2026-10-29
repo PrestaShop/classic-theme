@@ -168,6 +168,32 @@ $(document).ready(() => {
   imageScrollBox();
   addJsProductTabActiveSelector();
 
+  /**
+   * Core reports a rejected "add to cart" - out of stock, minimum quantity, no longer available -
+   * by emitting `handleError`, and then stops. Nothing in this theme listened, so the customer got
+   * no feedback at all: the button did nothing and the reason only appeared after a page reload.
+   *
+   * Scoped to the add-to-cart case on purpose. The other `handleError` emitters cover pages with no
+   * availability slot to write into, and a catch-all listener would start surfacing messages they
+   * never showed before.
+   */
+  prestashop.on('handleError', (event) => {
+    if (!event || event.eventType !== 'addProductToCart') {
+      return;
+    }
+
+    // The `.fail()` emitters pass a jqXHR, which carries no `errors`.
+    const errors = event.resp && event.resp.errors;
+
+    if (!Array.isArray(errors) || errors.length === 0) {
+      return;
+    }
+
+    prestashop.emit('showErrorNextToAddtoCartButton', {
+      errorMessage: errors.join(' '),
+    });
+  });
+
   prestashop.on('updatedProduct', (event) => {
     createInputFile();
     coverImage();
