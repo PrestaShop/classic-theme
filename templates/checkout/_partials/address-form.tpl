@@ -34,13 +34,15 @@
     <button type="submit" class="btn btn-primary float-xs-right">{l s='Save' d='Shop.Theme.Actions'}</button>
     <a class="js-cancel-address cancel-address float-xs-right" href="{url entity='order' params=['cancelAddress' => {$type}]}">{l s='Cancel' d='Shop.Theme.Actions'}</a>
   {else}
-    <form>
+    {* WHY: not a <form>. This block is rendered inside the address form, so a nested form here is
+       dropped by the HTML parser while its </form> closes the address form early. *}
+    <div class="clearfix">
       <button type="submit" class="continue btn btn-primary float-xs-right" name="confirm-addresses" value="1">
           {l s='Continue' d='Shop.Theme.Actions'}
       </button>
       {if $customer.addresses|count > 0}
         <a class="js-cancel-address cancel-address float-xs-right" href="{url entity='order' params=['cancelAddress' => {$type}]}">{l s='Cancel' d='Shop.Theme.Actions'}</a>
       {/if}
-    </form>
+    </div>
   {/if}
 {/block}
