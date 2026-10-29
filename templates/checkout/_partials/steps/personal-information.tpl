@@ -47,8 +47,11 @@
     </div>
 
   {else}
+    {* The items carry role="presentation" so the links below them are the tablist's own children
+       in the accessibility tree. A bare <li> keeps its listitem role, and a tablist may only own
+       tabs, so the whole list fails the aria-required-children check. *}
     <ul class="nav nav-inline my-2" role="tablist">
-      <li class="nav-item">
+      <li class="nav-item" role="presentation">
         <a
           class="nav-link {if !$show_login_form}active{/if}"
           data-toggle="tab"
@@ -65,11 +68,11 @@
         </a>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item" role="presentation">
         <span class="nav-separator"> | </span>
       </li>
 
-      <li class="nav-item">
+      <li class="nav-item" role="presentation">
         <a
           class="nav-link {if $show_login_form}active{/if}"
           data-link-action="show-login-form"

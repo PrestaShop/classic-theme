@@ -140,9 +140,12 @@
 
             {block name='product_tabs'}
               <div class="tabs">
+                {* The items carry role="presentation" so the links below them are the tablist's own children
+                   in the accessibility tree. A bare <li> keeps its listitem role, and a tablist may only own
+                   tabs, so the whole list fails the aria-required-children check. *}
                 <ul class="nav nav-tabs" role="tablist">
                   {if $product.description}
-                    <li class="nav-item">
+                    <li class="nav-item" role="presentation">
                        <a
                          class="nav-link{if $product.description} active js-product-nav-active{/if}"
                          data-toggle="tab"
@@ -152,7 +155,7 @@
                          {if $product.description} aria-selected="true"{/if}>{l s='Description' d='Shop.Theme.Catalog'}</a>
                     </li>
                   {/if}
-                  <li class="nav-item">
+                  <li class="nav-item" role="presentation">
                     <a
                       class="nav-link{if !$product.description} active js-product-nav-active{/if}"
                       data-toggle="tab"
@@ -162,7 +165,7 @@
                       {if !$product.description} aria-selected="true"{/if}>{l s='Product Details' d='Shop.Theme.Catalog'}</a>
                   </li>
                   {if $product.attachments}
-                    <li class="nav-item">
+                    <li class="nav-item" role="presentation">
                       <a
                         class="nav-link"
                         data-toggle="tab"
@@ -172,7 +175,7 @@
                     </li>
                   {/if}
                   {foreach from=$product.extraContent item=extra key=extraKey}
-                    <li class="nav-item">
+                    <li class="nav-item" role="presentation">
                       <a
                         class="nav-link"
                         data-toggle="tab"
