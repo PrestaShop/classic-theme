@@ -1,8 +1,7 @@
-<div class="js-product-details tab-pane fade{if !$product.description} in active{/if}"
-     id="product-details"
-     data-product="{$product.embedded_attributes|json_encode}"
-     role="tabpanel"
-  >
+{* Every block below is conditional, so the pane can come out with nothing in it. Capture it first and
+   emit the wrapper only when it holds something, so product.tpl can drop the tab instead of showing an
+   empty panel. Child themes overriding any block are unaffected - the blocks are unchanged. *}
+{capture name='product_details_content'}
   {block name='product_reference'}
     {if !empty($product_manufacturer.id)}
       <div class="product-manufacturer">
@@ -55,9 +54,14 @@
   {/block}
 
   {block name='product_out_of_stock'}
-    <div class="product-out-of-stock">
-      {hook h='actionProductOutOfStock' product=$product}
-    </div>
+    {* The six sibling blocks all guard their markup; this one emitted its wrapper even when no module
+       answered the hook, which is what left the pane holding a single empty div. *}
+    {capture name='product_out_of_stock'}{hook h='actionProductOutOfStock' product=$product}{/capture}
+    {if trim($smarty.capture.product_out_of_stock) !== ''}
+      <div class="product-out-of-stock">
+        {$smarty.capture.product_out_of_stock nofilter}
+      </div>
+    {/if}
   {/block}
 
   {block name='product_features'}
@@ -98,4 +102,22 @@
       </div>
     {/if}
   {/block}
-</div>
+{/capture}
+
+{* Keep the pane when it has content. When it has none it is only kept if there is no description tab,
+   because then this pane is the one carrying `active` and something has to be shown.
+
+   The answer is published as a variable rather than left for the caller to infer from this template's
+   output: in debug mode SmartyDevTemplate wraps every include in `<!-- begin ... -->` comments, so a
+   caller testing the rendered markup for emptiness would find it non-empty on every dev shop. *}
+{assign var='product_details_has_content' value=(trim($smarty.capture.product_details_content) !== '') scope='root'}
+
+{if $product_details_has_content || !$product.description}
+  <div class="js-product-details tab-pane fade{if !$product.description} in active{/if}"
+       id="product-details"
+       data-product="{$product.embedded_attributes|json_encode}"
+       role="tabpanel"
+    >
+    {$smarty.capture.product_details_content nofilter}
+  </div>
+{/if}
