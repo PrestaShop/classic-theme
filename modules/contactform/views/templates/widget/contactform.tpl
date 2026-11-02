@@ -94,7 +94,12 @@
           <div class="form-group row">
             <label class="col-md-3 form-control-label" for="file-upload">{l s='Attachment' d='Shop.Forms.Labels'}</label>
             <div class="col-md-6">
-              <input id="file-upload" type="file" name="fileUpload" class="filestyle" data-buttonText="{l s='Choose file' d='Shop.Theme.Actions'}">
+              <input id="file-upload" type="file" name="fileUpload" class="filestyle" data-buttonText="{l s='Choose file' d='Shop.Theme.Actions'}"{if isset($contact.allowed_file_extensions)} accept="{$contact.allowed_file_extensions|escape:'html':'UTF-8'}" aria-describedby="file-upload-formats"{/if}>
+              {if isset($contact.allowed_file_extensions)}
+                <small id="file-upload-formats" class="form-text text-muted">
+                  {l s='Allowed formats: %formats%' sprintf=['%formats%' => $contact.allowed_file_extensions|escape:'html':'UTF-8'] d='Modules.Contactform.Shop'}
+                </small>
+              {/if}
             </div>
             <span class="col-md-3 form-control-comment">
               {l s='optional' d='Shop.Forms.Help'}
