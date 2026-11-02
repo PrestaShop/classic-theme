@@ -51,6 +51,8 @@ assets:
 global_settings:
   configuration:
     PS_IMAGE_QUALITY: png
+    PS_USE_JQUERY_UI_AUTOCOMPLETE: 1
+    PS_USE_JQUERY_UI_SLIDER: 1
   modules:
     to_enable:
       - ps_linklist
