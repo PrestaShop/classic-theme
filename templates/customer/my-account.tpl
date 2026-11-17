@@ -94,6 +94,15 @@
         </a>
       {/if}
 
+      {if $configuration.withdrawal_enabled && !$configuration.is_catalog}
+        <a class="col-lg-4 col-md-6 col-sm-6 col-xs-12" id="withdrawal-link" href="{$urls.pages.withdrawal}">
+          <span class="link-item">
+            <i class="material-icons">&#xE14C;</i>
+            {l s='Withdraw from a contract' d='Shop.Theme.Customeraccount'}
+          </span>
+        </a>
+      {/if}
+
       {block name='display_customer_account'}
         {hook h='displayCustomerAccount'}
       {/block}

@@ -151,6 +151,10 @@
 
   {$HOOK_DISPLAYORDERDETAIL nofilter}
 
+  {block name='order_withdrawal'}
+    {include file='customer/_partials/order-withdrawal.tpl'}
+  {/block}
+
   {block name='order_detail'}
     {if $order.details.is_returnable && !$orderIsVirtual}
       {if $order.shipments}
